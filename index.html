@@ -11,8 +11,8 @@
 </head>
 
 <body>
-  <div id="bg-canvas"></div>
-  <canvas id="particulas"></canvas>
+  <div id="progresso"></div>
+
   <!-- Ícones reutilizáveis (lucide, licença ISC) -->
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -20,12 +20,6 @@
     </symbol>
     <symbol id="i-calc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/>
-    </symbol>
-    <symbol id="i-calendario" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/>
-    </symbol>
-    <symbol id="i-livro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>
     </symbol>
     <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/>
@@ -50,122 +44,73 @@
     </symbol>
   </svg>
 
-  <!-- ================= CABEÇALHO ================= -->
-  <header id="topo">
-    <div class="container">
-
-      <nav id="nav-secoes" aria-label="Seções">
-        <a href="#mercado">Mercado</a>
-        <a href="#comparativo">Comparativo</a>
-        <a href="#coautoria">Coautoria</a>
-        <a href="#checklist">Checklist</a>
-        <a href="#simulador">Simulador</a>
-        <a href="#orcamentos">Orçamentos</a>
-        <a href="#implementacao">Implementação</a>
-        <a href="#coletaneas">Coletâneas</a>
-        <a href="#produtos">Produtos</a>
-        <a href="#salarios">Salários</a>
-        <a href="#financeiro">Financeiro</a>
-      </nav>
+  <!-- ================= NAVEGAÇÃO ================= -->
+  <nav class="topo" aria-label="Seções">
+    <div class="wrap">
+      <a class="marca" href="#topo"><img src="img/logo-arbor.png" alt="">ARBOR <em>· Editora</em></a>
+      <ul id="nav-secoes">
+        <li><a href="#mercado">Mercado</a></li>
+        <li><a href="#comparativo">Comparativo</a></li>
+        <li><a href="#coautoria">Coautoria</a></li>
+        <li><a href="#checklist">Checklist</a></li>
+        <li><a href="#simulador">Orçamentos</a></li>
+        <li><a href="#implementacao">Implementação</a></li>
+        <li><a href="#coletaneas">Coletâneas</a></li>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#salarios">Salários</a></li>
+        <li><a href="#financeiro">Financeiro</a></li>
+        <li><a href="#guias">Guias</a></li>
+      </ul>
     </div>
-    <span id="progresso-leitura" aria-hidden="true"></span>
-  </header>
+  </nav>
 
   <!-- ================= HERO ================= -->
-  <section id="hero">
-    <div class="container hero-content">
-      <img src="img/logo-editora-13.png" alt="ARBOR" class="hero-main-logo">
-      <p class="desc">Transformação digital do mercado de editoração acadêmica e profissional. Uma plataforma
+  <header class="hero" id="topo">
+    <div class="selo">Modelo Editorial · 2026 · Arbor Editora ·&nbsp;</div>
+    <div class="wrap">
+      <img src="img/logo-editora-13.png" alt="ARBOR — Ideias que crescem, conhecimento que transforma" class="hero-main-logo">
+      <p class="frase">Uma editora que <span id="typing"></span><span class="cursor" aria-hidden="true"></span></p>
+      <p class="sub">Transformação digital do mercado de editoração acadêmica e profissional. Uma plataforma
         robusta que une viabilidade financeira, excelência gráfica e canais estratégicos de distribuição.</p>
-      <div class="ctas">
-        <a class="btn btn-claro" href="#mercado"><svg class="ic"><use href="#i-globe"/></svg> Pesquisa de Mercado</a>
-        <a class="btn btn-contorno" href="#simulador"><svg class="ic"><use href="#i-calc"/></svg> Simulador de Orçamentos</a>
-      </div>
+      <a class="btn btn-verde" href="#mercado"><svg class="ic"><use href="#i-globe"/></svg> Pesquisa de Mercado</a>
+      <a class="btn btn-ghost" href="#simulador" style="margin-left:.6rem"><svg class="ic"><use href="#i-calc"/></svg> Simulador de Orçamentos</a>
     </div>
-  </section>
+  </header>
 
-  <main class="container">
-
-    <!-- ================= ATALHOS ================= -->
-    <section class="atalhos" aria-label="Atalhos">
-      <a class="atalho" href="#mercado">
-        <span class="icone"><svg class="ic"><use href="#i-globe"/></svg></span>
-        <span class="seta">→</span>
-        <h3>Análise de Concorrentes</h3>
-        <p>Análise detalhada de 5 grandes editoras do país, preços, pacotes e canais comerciais.</p>
-      </a>
-      <a class="atalho" href="#simulador">
-        <span class="icone"><svg class="ic"><use href="#i-calc"/></svg></span>
-        <span class="seta">→</span>
-        <h3>Simulação de Orçamentos</h3>
-        <p>10 tabelas reais integradas para simular custos de miolo, capa mole e dura.</p>
-      </a>
-      <a class="atalho" href="#implementacao">
-        <span class="icone"><svg class="ic"><use href="#i-calendario"/></svg></span>
-        <span class="seta">→</span>
-        <h3>Cronograma &amp; Fluxo</h3>
-        <p>Etapas estratégicas de 2026/04 até o lançamento na biblioteca em 2027/03.</p>
-      </a>
-      <a class="atalho" href="#guias">
-        <span class="icone"><svg class="ic"><use href="#i-livro"/></svg></span>
-        <span class="seta">→</span>
-        <h3>Guias do Autor</h3>
-        <p>Como proteger direitos na BN, estrutura de dígitos do ISBN e publicação Amazon.</p>
-      </a>
-    </section>
-
-    <!-- ================= PESQUISA DE MERCADO ================= -->
-    <section id="mercado" class="box box-lavanda">
-      <div class="section-head">
-        <span class="kicker">Análise Setorial</span>
-        <h2>Pesquisa de Mercado</h2>
-        <p>Comparação profunda com os principais players de publicação do Brasil</p>
-      </div>
-
-      <!-- Players: selecione um card para ver a análise -->
-      <div class="abas">
-        <input type="radio" name="player" id="pl-1" checked>
-        <input type="radio" name="player" id="pl-2">
-        <input type="radio" name="player" id="pl-3">
-        <input type="radio" name="player" id="pl-4">
-        <input type="radio" name="player" id="pl-5">
-
-        <div class="pills">
-          <label class="pill" for="pl-1">
-            <span class="rotulo">Player 1</span>
-            <strong>Expert Editora</strong>
+  <!-- ================= PESQUISA DE MERCADO ================= -->
+  <section id="mercado" class="claro">
+    <div class="wrap reveal">
+      <span class="kicker">Análise Setorial</span>
+      <h2>Pesquisa de Mercado</h2>
+      <p class="lead">Análise detalhada de 5 grandes editoras do país — preços, pacotes e canais comerciais.
+        Selecione um player para ver a análise extraída do estudo original.</p>
+      <div class="sim">
+        <div class="sim-modos" role="tablist" aria-label="Editoras analisadas">
+          <button class="modo ativo" data-player="0" role="tab" aria-selected="true">
+            <span class="rotulo">Player 1</span><strong>Expert Editora</strong>
             <span>Foco acadêmico e livre acesso PDF.</span>
-            <span class="ver">Ver detalhes ›</span>
-          </label>
-          <label class="pill" for="pl-2">
-            <span class="rotulo">Player 2</span>
-            <strong>Editora Leader</strong>
+          </button>
+          <button class="modo" data-player="1" role="tab" aria-selected="false">
+            <span class="rotulo">Player 2</span><strong>Editora Leader</strong>
             <span>Projetos de coautoria e biografias.</span>
-            <span class="ver">Ver detalhes ›</span>
-          </label>
-          <label class="pill" for="pl-3">
-            <span class="rotulo">Player 3</span>
-            <strong>Editora Viseu</strong>
+          </button>
+          <button class="modo" data-player="2" role="tab" aria-selected="false">
+            <span class="rotulo">Player 3</span><strong>Editora Viseu</strong>
             <span>Presença robusta e publicação assistida.</span>
-            <span class="ver">Ver detalhes ›</span>
-          </label>
-          <label class="pill" for="pl-4">
-            <span class="rotulo">Player 4</span>
-            <strong>Editora Íthala</strong>
+          </button>
+          <button class="modo" data-player="3" role="tab" aria-selected="false">
+            <span class="rotulo">Player 4</span><strong>Editora Íthala</strong>
             <span>Soluções completas e rede física.</span>
-            <span class="ver">Ver detalhes ›</span>
-          </label>
-          <label class="pill" for="pl-5">
-            <span class="rotulo">Player 5</span>
-            <strong>Editora Appris</strong>
+          </button>
+          <button class="modo" data-player="4" role="tab" aria-selected="false">
+            <span class="rotulo">Player 5</span><strong>Editora Appris</strong>
             <span>Modelo 80/20 e prêmio Jabuti.</span>
-            <span class="ver">Ver detalhes ›</span>
-          </label>
+          </button>
         </div>
+        <div class="sim-tela" aria-live="polite">
+          <div class="sim-topo"><i></i><i></i><i></i><span class="tag-nivel" id="player-tag">Player 1/5 · Expert</span></div>
 
-        <div class="paineis">
-          <article class="player-detalhe">
-            <span class="kicker">Dados extraídos do PDF original</span>
+          <article class="player-painel ativo">
             <h3>Análise Editorial: Expert Editora</h3>
             <h5>Estratégia de Conteúdo</h5>
             <ul>
@@ -177,30 +122,28 @@
               <li>Possibilidade de impressão dos livros pelo próprio autor.</li>
               <li>Distribuição digital robusta via PDF e Google Livros.</li>
             </ul>
-            <p class="site">Acesse a página oficial do concorrente:
+            <p class="site">Página oficial do concorrente:
               <a href="https://experteditora.com.br/" target="_blank" rel="noopener">experteditora.com.br</a></p>
           </article>
 
-          <article class="player-detalhe">
-            <span class="kicker">Dados extraídos do PDF original</span>
+          <article class="player-painel">
             <h3>Análise Editorial: Editora Leader</h3>
             <h5>Serviços Oferecidos</h5>
             <ul>
-              <li>Publique seu livro: Foco em autores independentes.</li>
-              <li>Projeto de Coautoria: Produção coletiva focada em nichos específicos.</li>
-              <li>Biografias Empresariais: Segmento corporativo e histórias de sucesso.</li>
+              <li>Publique seu livro: foco em autores independentes.</li>
+              <li>Projeto de Coautoria: produção coletiva focada em nichos específicos.</li>
+              <li>Biografias Empresariais: segmento corporativo e histórias de sucesso.</li>
             </ul>
             <h5>Linhas Editoriais</h5>
             <ul>
-              <li>Leader Acadêmicos: Publicações de cunho acadêmico e técnico.</li>
-              <li>Distribuição: Presença em redes nacionais de livrarias.</li>
+              <li>Leader Acadêmicos: publicações de cunho acadêmico e técnico.</li>
+              <li>Distribuição: presença em redes nacionais de livrarias.</li>
             </ul>
-            <p class="site">Acesse a página oficial do concorrente:
+            <p class="site">Página oficial do concorrente:
               <a href="https://editoraleader.com.br/" target="_blank" rel="noopener">editoraleader.com.br</a></p>
           </article>
 
-          <article class="player-detalhe">
-            <span class="kicker">Dados extraídos do PDF original</span>
+          <article class="player-painel">
             <h3>Análise Editorial: Editora Viseu</h3>
             <h5>Dados Corporativos &amp; Distribuição</h5>
             <p>Distribuição robusta e presença nos principais marketplaces e lojas do país e do mundo.</p>
@@ -209,12 +152,11 @@
               <li>50% de comissão sobre o lucro de todas as vendas de sua obra.</li>
               <li>Autores podem adquirir livros ao preço de custo.</li>
             </ul>
-            <p class="site">Acesse a página de publicação da Viseu:
+            <p class="site">Página de publicação da Viseu:
               <a href="https://editoraviseu.com/como-publicar-seu-livro/" target="_blank" rel="noopener">editoraviseu.com</a></p>
           </article>
 
-          <article class="player-detalhe">
-            <span class="kicker">Dados extraídos do PDF original</span>
+          <article class="player-painel">
             <h3>Análise Editorial: Editora Íthala</h3>
             <h5>Especialização Técnica</h5>
             <p>Somos especializados em soluções capazes de minimizar custos e prazos de produção. Dispomos da
@@ -241,12 +183,11 @@
               <li>Livros e Revistas são alvos de interesse de 7,6% dos e-consumidores.</li>
               <li>Mais informações em: www.ebit.com.br</li>
             </ul>
-            <p class="site">Acesse a página oficial da Íthala:
+            <p class="site">Página oficial da Íthala:
               <a href="https://www.ithala.com.br/" target="_blank" rel="noopener">ithala.com.br</a></p>
           </article>
 
-          <article class="player-detalhe">
-            <span class="kicker">Dados extraídos do PDF original</span>
+          <article class="player-painel">
             <h3>Análise Editorial: Editora Appris</h3>
             <h5>Estratégia e Parcerias</h5>
             <ul>
@@ -256,741 +197,559 @@
             <h5>Especialidades</h5>
             <p>Foco em obras científicas, pontuadas e premiadas, de forma a alcançar todo o público da área
               acadêmica do autor, sob as diretrizes de comitês científicos renomados.</p>
-            <p class="site">Acesse a página oficial da Appris:
+            <p class="site">Página oficial da Appris:
               <a href="https://editoraappris.com.br/" target="_blank" rel="noopener">editoraappris.com.br</a></p>
           </article>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ================= TABELA COMPARATIVA ================= -->
-    <section class="box box-menta" aria-labelledby="titulo-valores">
-      <div class="section-head">
-        <h3 id="titulo-valores">Tabela Comparativa de Valores</h3>
-        <p>Valores encontrados publicamente e observações para pesquisa de mercado</p>
-      </div>
-      <div class="tabela-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>Editora</th>
-              <th>Valor encontrado publicamente</th>
-              <th>Observações para pesquisa de mercado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Editora Appris</td>
-              <td>Não informa um valor fechado. Indica modelo 80/20, em que a editora financia cerca de 80% e o
-                autor investe em média até 20% dos custos de publicação.</td>
-              <td>Trabalha com proposta individualizada. A página também informa diagnóstico sem custo e proposta
-                com três modelos de orçamento.</td>
-            </tr>
-            <tr>
-              <td>Editora Dialética</td>
-              <td>R$ 1.072,00 no Pacote Especial; R$ 2.495,00 no Pacote Premium.</td>
-              <td>O Pacote Especial aparece voltado ao formato físico; o Premium inclui físico, e-book e audiobook
-                com voz de IA. Ambos mencionam 50% de direitos autorais sobre lucro líquido.</td>
-            </tr>
-            <tr>
-              <td>Editora CRV</td>
-              <td>Não localizei tabela pública de preço.</td>
-              <td>O site descreve submissão, avaliação, ISBN, ficha catalográfica, DOI, edição, projeto visual,
-                diagramação, publicação, impressão, lançamento e divulgação, mas o valor parece ser informado por
-                proposta/contrato.</td>
-            </tr>
-            <tr>
-              <td>Editora Viseu</td>
-              <td>A partir de R$ 3.600,00; em outro conteúdo, a partir de R$ 4.500,00; também aparece faixa de
-                R$ 3.600,00 a R$ 100.000,00.</td>
-              <td>O valor varia conforme tamanho da obra, produção, cópias, distribuição, divulgação, ilustrações e
-                tipo de capa. A editora informa que os autores ficam com 50% dos lucros das vendas.</td>
-            </tr>
-            <tr>
-              <td>Editora Íthala</td>
-              <td>Não localizei tabela pública de preço.</td>
-              <td>O site informa serviços como homologação/ISBN, impressão, impressão sob demanda, projeto gráfico,
-                diagramação, arte-final, layout de capa e revisão, mas sem valores públicos.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+  <!-- ================= COMPARATIVOS ================= -->
+  <section id="comparativo" class="claro-2">
+    <div class="wrap reveal">
+      <span class="kicker">Lado a Lado</span>
+      <h2>Comparativos de mercado</h2>
+      <p class="lead">Valores encontrados publicamente e funcionalidades comerciais extraídas das plataformas dos
+        concorrentes. Abra cada bloco para consultar.</p>
 
-    <!-- ================= RECURSOS COMPARADOS ================= -->
-    <section id="comparativo" class="box box-lavanda">
-      <div class="section-head">
-        <h3>Recursos e Características Comparadas</h3>
-        <p>Funcionalidades comerciais e estruturais extraídas das plataformas dos concorrentes</p>
-      </div>
-      <div class="tabela-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>Característica</th>
-              <th>Leader</th>
-              <th>Expert</th>
-              <th>Íthala</th>
-              <th>Viseu</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>E-commerce</td>
-              <td><span class="sim">Sim (X)</span></td>
-              <td></td>
-              <td><span class="sim">Sim (X)</span></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Material Didático</td>
-              <td></td>
-              <td><span class="sim">Sim (X)</span></td>
-              <td><span class="sim">Sim (X)</span></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Coletâneas</td>
-              <td><span class="sim">Sim (X)</span></td>
-              <td></td>
-              <td><span class="sim">Sim (X)</span></td>
-              <td><span class="sim">Sim (X)</span></td>
-            </tr>
-            <tr>
-              <td>Serviços</td>
-              <td>Publique seu livro, Projeto de Coautoria, Biografias Empresariais, Leader Acadêmicos,
-                Distribuição</td>
-              <td>Publique sua tese, Distribuição gratuita</td>
-              <td>Prestação de serviços editoriais para autores, publicação independente, comercialização direta de
-                livros em loja própria e distribuição por canais físicos e digitais.</td>
-              <td>Avaliação editorial, orçamento, revisão, capa, diagramação, impressão, distribuição, assessoria
-                de imprensa, pré-venda, lançamento e tráfego pago.</td>
-            </tr>
-            <tr>
-              <td>Tipos de materiais</td>
-              <td>Amplo catálogo geral</td>
-              <td>Teses, dissertações e acadêmicos em geral</td>
-              <td>Catálogo é amplo, mas há forte concentração em obras jurídicas, acadêmicas, técnicas e
-                profissionais. As categorias visíveis incluem Administração/Contabilidade, Auditoria, Concursos,
-                Educação, Engenharia, História, Infantil, Jurídicos, Literatura, Marketing, Saúde, Segurança
-                Pública, E-book, entre outras. Dentro de Jurídicos, há subdivisões como Direito Administrativo,
-                Direito Ambiental, Direito Civil, Direito Constitucional, Direito Digital, Direito Penal, Direito
-                Tributário, Direitos Humanos, Políticas Públicas e Relações Internacionais.</td>
-              <td>Estrategicamente, a Viseu se posiciona como uma editora de publicação assistida para autores
-                independentes e estreantes, com forte ênfase em marketing, distribuição em marketplaces, presença
-                digital e captação de novos autores. O diferencial competitivo está no discurso de escala, no
-                volume de autores publicados, na rede de marketplaces e no pacote de serviços para lançamento.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+      <div style="margin-top:2.2rem">
+        <details class="acordeao" open>
+          <summary>Tabela Comparativa de Valores<span class="resumo">Valores públicos e observações para pesquisa de mercado</span></summary>
+          <div class="corpo">
+            <div class="tabela-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Editora</th>
+                    <th>Valor encontrado publicamente</th>
+                    <th>Observações para pesquisa de mercado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Editora Appris</td>
+                    <td>Não informa um valor fechado. Indica modelo 80/20, em que a editora financia cerca de 80% e o
+                      autor investe em média até 20% dos custos de publicação.</td>
+                    <td>Trabalha com proposta individualizada. A página também informa diagnóstico sem custo e proposta
+                      com três modelos de orçamento.</td>
+                  </tr>
+                  <tr>
+                    <td>Editora Dialética</td>
+                    <td>R$ 1.072,00 no Pacote Especial; R$ 2.495,00 no Pacote Premium.</td>
+                    <td>O Pacote Especial aparece voltado ao formato físico; o Premium inclui físico, e-book e audiobook
+                      com voz de IA. Ambos mencionam 50% de direitos autorais sobre lucro líquido.</td>
+                  </tr>
+                  <tr>
+                    <td>Editora CRV</td>
+                    <td>Não localizei tabela pública de preço.</td>
+                    <td>O site descreve submissão, avaliação, ISBN, ficha catalográfica, DOI, edição, projeto visual,
+                      diagramação, publicação, impressão, lançamento e divulgação, mas o valor parece ser informado por
+                      proposta/contrato.</td>
+                  </tr>
+                  <tr>
+                    <td>Editora Viseu</td>
+                    <td>A partir de R$ 3.600,00; em outro conteúdo, a partir de R$ 4.500,00; também aparece faixa de
+                      R$ 3.600,00 a R$ 100.000,00.</td>
+                    <td>O valor varia conforme tamanho da obra, produção, cópias, distribuição, divulgação, ilustrações e
+                      tipo de capa. A editora informa que os autores ficam com 50% dos lucros das vendas.</td>
+                  </tr>
+                  <tr>
+                    <td>Editora Íthala</td>
+                    <td>Não localizei tabela pública de preço.</td>
+                    <td>O site informa serviços como homologação/ISBN, impressão, impressão sob demanda, projeto gráfico,
+                      diagramação, arte-final, layout de capa e revisão, mas sem valores públicos.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
 
-    <!-- ================= COAUTORIA ================= -->
-    <section id="coautoria" class="box box-menta">
-      <div class="section-head">
-        <span class="kicker">Modelo de Produto Adicional</span>
-        <h3>Editora Leader — Projetos de Coautoria</h3>
-        <p>Análise operacional da coautoria como geradora de receita escalável com múltiplos autores em uma única
-          obra.</p>
+        <details class="acordeao">
+          <summary>Recursos e Características Comparadas<span class="resumo">E-commerce, material didático, coletâneas, serviços e tipos de materiais</span></summary>
+          <div class="corpo">
+            <div class="tabela-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Característica</th>
+                    <th>Leader</th>
+                    <th>Expert</th>
+                    <th>Íthala</th>
+                    <th>Viseu</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>E-commerce</td>
+                    <td><span class="sim-check">Sim ✓</span></td>
+                    <td></td>
+                    <td><span class="sim-check">Sim ✓</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Material Didático</td>
+                    <td></td>
+                    <td><span class="sim-check">Sim ✓</span></td>
+                    <td><span class="sim-check">Sim ✓</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Coletâneas</td>
+                    <td><span class="sim-check">Sim ✓</span></td>
+                    <td></td>
+                    <td><span class="sim-check">Sim ✓</span></td>
+                    <td><span class="sim-check">Sim ✓</span></td>
+                  </tr>
+                  <tr>
+                    <td>Serviços</td>
+                    <td>Publique seu livro, Projeto de Coautoria, Biografias Empresariais, Leader Acadêmicos,
+                      Distribuição</td>
+                    <td>Publique sua tese, Distribuição gratuita</td>
+                    <td>Prestação de serviços editoriais para autores, publicação independente, comercialização direta de
+                      livros em loja própria e distribuição por canais físicos e digitais.</td>
+                    <td>Avaliação editorial, orçamento, revisão, capa, diagramação, impressão, distribuição, assessoria
+                      de imprensa, pré-venda, lançamento e tráfego pago.</td>
+                  </tr>
+                  <tr>
+                    <td>Tipos de materiais</td>
+                    <td>Amplo catálogo geral</td>
+                    <td>Teses, dissertações e acadêmicos em geral</td>
+                    <td>Catálogo é amplo, mas há forte concentração em obras jurídicas, acadêmicas, técnicas e
+                      profissionais. As categorias visíveis incluem Administração/Contabilidade, Auditoria, Concursos,
+                      Educação, Engenharia, História, Infantil, Jurídicos, Literatura, Marketing, Saúde, Segurança
+                      Pública, E-book, entre outras. Dentro de Jurídicos, há subdivisões como Direito Administrativo,
+                      Direito Ambiental, Direito Civil, Direito Constitucional, Direito Digital, Direito Penal, Direito
+                      Tributário, Direitos Humanos, Políticas Públicas e Relações Internacionais.</td>
+                    <td>Estrategicamente, a Viseu se posiciona como uma editora de publicação assistida para autores
+                      independentes e estreantes, com forte ênfase em marketing, distribuição em marketplaces, presença
+                      digital e captação de novos autores. O diferencial competitivo está no discurso de escala, no
+                      volume de autores publicados, na rede de marketplaces e no pacote de serviços para lançamento.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
       </div>
-      <div class="coautoria-grid">
-        <div class="painel">
-          <div class="stat"><span>Autores por Livro</span><b>+/- 15 autoras por livro</b></div>
-          <div class="stat"><span>Investimento por Autora</span><b>R$ 3.600,00</b></div>
-          <div class="stat"><span>Valor Estimado do Lote (15 Autores)</span><b class="destaque">R$ 54.000,00</b></div>
+    </div>
+  </section>
+
+  <!-- ================= COAUTORIA ================= -->
+  <section id="coautoria" class="claro">
+    <div class="wrap reveal">
+      <span class="kicker">Modelo de Produto Adicional</span>
+      <h2>Projetos de Coautoria</h2>
+      <p class="lead">Análise operacional da coautoria (modelo Editora Leader) como geradora de receita escalável com
+        múltiplos autores em uma única obra. Arraste o controle e veja o valor do lote.</p>
+      <div class="auto-grid">
+        <div class="slider-caixa">
+          <label for="nivel-autoras">Autoras participantes no livro</label>
+          <div class="valor-slider"><span id="qtd-autoras">15</span> <small>autoras</small></div>
+          <input type="range" id="nivel-autoras" min="5" max="20" value="15" step="1" aria-describedby="lote-total">
+          <div class="range-labels"><span>5</span><span>20</span></div>
+          <p class="ref">Referência do estudo original: <b>±15 autoras por livro</b>, com investimento de
+            <b>R$ 3.600,00 por autora</b>.</p>
         </div>
-        <div class="painel">
-          <h4 style="margin-bottom:12px">Serviços ofertados no pacote:</h4>
-          <ul class="servicos">
-            <li><span class="num">1</span> Apoio completo na construção e redação do Capítulo</li>
-            <li><span class="num">2</span> 20 livros impressos inclusos (formato brochura + capa colorida)</li>
-            <li><span class="num">3</span> Realização de um requintado jantar de lançamento e noite de autógrafos</li>
-            <li><span class="num">4</span> Livros extras comercializados sob demanda (frete pago à parte)</li>
-          </ul>
+        <div class="auto-painel">
+          <div class="linha-stat">Investimento por autora <b>R$ 3.600,00</b></div>
+          <div class="linha-stat">Autoras no lote <b id="stat-autoras">15</b></div>
+          <div class="total">
+            <span>Valor estimado do lote</span>
+            <b id="lote-total">R$ 54.000,00</b>
+          </div>
         </div>
       </div>
-    </section>
-
-    <!-- ================= CHECKLIST APPRIS ================= -->
-    <section id="checklist" class="box box-lavanda">
-      <div class="section-head">
-        <span class="kicker">Padrão Ouro</span>
-        <h3>Appris Editora — Checklist Premium</h3>
-        <p>27 diferenciais e serviços editoriais integrados analisados na concorrência</p>
-      </div>
-      <ul class="checklist">
-        <li><svg class="ic"><use href="#i-check"/></svg> Avaliação por comitês científicos nacionais e internacionais, distribuídos em 29 coleções científicas, formada por doutores e pós-doutores de renome nacional e internacional;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Leitura minuciosa com feedback e sugestões de alterações e melhorias na apresentação dos textos;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> A revisão em duas etapas, com correções na ortografia e gramática, com atenção a incoerências, repetições, sugestões de melhorias na clareza e fluidez dos textos;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Intervenções na normatização em atendimento às normas da ABNT e padronização pelos critérios da CAPES;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Cumprimos integralmente o item Editora da CAPES, para classificação de livros científicos;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Estudo gráfico e projeto visual feitos por equipe especializada em design gráfico, a partir de briefing com autor para detalhamento de suas expectativas;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Diagramação padronizada contemplando todos os requisitos normativos e critérios do roteiro de avaliação de livros pela CAPES;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> O autor recebe uma print (boneco do livro impresso e entregue via correios) para sua revisão e conferência de qualidade de materiais;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Capa personalizada — projeto visual de capa baseado no Briefing enviado pelo autor, detalhando suas aspirações;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> ISBN, DOI e ficha catalográfica;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> E-book 3.0;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Apresentação e disponibilização para a consignação da obra (quando solicitado pelos livreiros) nos catálogos das grandes livrarias físicas;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Apresentação e disponibilização da obra em catálogos eletrônicos das livrarias online e marketplaces nacionais;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Seu livro impresso disponível para compra pelo site da Appris com milhares de acessos mensais;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> A editora acata a solicitação dos autores que indicam eventos (em parcerias com livreiros de todo o Brasil) nos quais desejam que seu livro seja comercializado de acordo com a sua temática e área;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Lançamento personalizado na cidade do autor (em livrarias), agendado pela editora, com convite eletrônico e banner cortesia;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> E-book comercializado nas grandes redes online e marketplaces nacionais e no exterior, inclusive pela Amazon Internacional;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> A grande parceria Grupo Editorial Appris — Amazon, garante aos autores a pré-venda em destaque na plataforma da Amazon pelo período de até 40 dias antes do lançamento. Essa ação promove grande interesse dos leitores;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> O seu livro poderá ser selecionado para exclusividade de 60 dias na plataforma Amazon;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Cumprimento da lei do depósito legal, da Fundação Biblioteca Nacional;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Desconto progressivo para os autores adquirirem exemplares do seu livro;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Folders eletrônicos para o autor oferecer descontos para seus contatos, alunos e colegas;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Autor tem acesso livre ao e-book para presentear a seus pares notórios e amigos;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Um banner grande, com a capa do livro, para exposição no espaço de autógrafos;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Seu livro é apresentado como pauta para uma série de jornalistas e imprensa com editorias coerentes ao tema de seu livro;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Inserção do livro no Catálogo de Apostas da Appris, enviado semanalmente para um mailing exclusivo de livrarias e compradores livreiros;</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Utilização do código BISAC para cadastrar os livros — moderna estrutura de cadastramento que aumenta a visualização e alcance de seu livro nos portais e pontos de venda.</li>
+      <ul class="servicos-coautoria">
+        <li><span class="num">1</span> Apoio completo na construção e redação do Capítulo</li>
+        <li><span class="num">2</span> 20 livros impressos inclusos (formato brochura + capa colorida)</li>
+        <li><span class="num">3</span> Realização de um requintado jantar de lançamento e noite de autógrafos</li>
+        <li><span class="num">4</span> Livros extras comercializados sob demanda (frete pago à parte)</li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <!-- ================= SIMULADOR DE ORÇAMENTOS ================= -->
-    <section id="simulador" class="box box-menta">
-      <div class="section-head">
-        <span class="kicker">Calculadora Operacional</span>
-        <h2>Simulador Real de Orçamentos</h2>
-        <p>Simule custos gráficos baseados em 10 orçamentos reais extraídos das propostas de lote</p>
+  <!-- ================= CHECKLIST APPRIS ================= -->
+  <section id="checklist" class="escuro">
+    <div class="wrap reveal">
+      <span class="kicker">Padrão Ouro</span>
+      <h2>Appris Editora — Checklist Premium</h2>
+      <p class="lead">27 diferenciais e serviços editoriais integrados analisados na concorrência.</p>
+      <div class="cuidados">
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Avaliação por comitês científicos nacionais e internacionais, distribuídos em 29 coleções científicas, formada por doutores e pós-doutores de renome nacional e internacional;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Leitura minuciosa com feedback e sugestões de alterações e melhorias na apresentação dos textos;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> A revisão em duas etapas, com correções na ortografia e gramática, com atenção a incoerências, repetições, sugestões de melhorias na clareza e fluidez dos textos;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Intervenções na normatização em atendimento às normas da ABNT e padronização pelos critérios da CAPES;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Cumprimos integralmente o item Editora da CAPES, para classificação de livros científicos;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Estudo gráfico e projeto visual feitos por equipe especializada em design gráfico, a partir de briefing com autor para detalhamento de suas expectativas;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Diagramação padronizada contemplando todos os requisitos normativos e critérios do roteiro de avaliação de livros pela CAPES;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> O autor recebe uma print (boneco do livro impresso e entregue via correios) para sua revisão e conferência de qualidade de materiais;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Capa personalizada — projeto visual de capa baseado no Briefing enviado pelo autor, detalhando suas aspirações;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> ISBN, DOI e ficha catalográfica;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> E-book 3.0;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Apresentação e disponibilização para a consignação da obra (quando solicitado pelos livreiros) nos catálogos das grandes livrarias físicas;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Apresentação e disponibilização da obra em catálogos eletrônicos das livrarias online e marketplaces nacionais;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Seu livro impresso disponível para compra pelo site da Appris com milhares de acessos mensais;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> A editora acata a solicitação dos autores que indicam eventos (em parcerias com livreiros de todo o Brasil) nos quais desejam que seu livro seja comercializado de acordo com a sua temática e área;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Lançamento personalizado na cidade do autor (em livrarias), agendado pela editora, com convite eletrônico e banner cortesia;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> E-book comercializado nas grandes redes online e marketplaces nacionais e no exterior, inclusive pela Amazon Internacional;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> A grande parceria Grupo Editorial Appris — Amazon, garante aos autores a pré-venda em destaque na plataforma da Amazon pelo período de até 40 dias antes do lançamento. Essa ação promove grande interesse dos leitores;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> O seu livro poderá ser selecionado para exclusividade de 60 dias na plataforma Amazon;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Cumprimento da lei do depósito legal, da Fundação Biblioteca Nacional;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Desconto progressivo para os autores adquirirem exemplares do seu livro;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Folders eletrônicos para o autor oferecer descontos para seus contatos, alunos e colegas;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Autor tem acesso livre ao e-book para presentear a seus pares notórios e amigos;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Um banner grande, com a capa do livro, para exposição no espaço de autógrafos;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Seu livro é apresentado como pauta para uma série de jornalistas e imprensa com editorias coerentes ao tema de seu livro;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Inserção do livro no Catálogo de Apostas da Appris, enviado semanalmente para um mailing exclusivo de livrarias e compradores livreiros;</div>
+        <div class="cuidado"><svg class="ic"><use href="#i-check"/></svg> Utilização do código BISAC para cadastrar os livros — moderna estrutura de cadastramento que aumenta a visualização e alcance de seu livro nos portais e pontos de venda.</div>
       </div>
+    </div>
+  </section>
 
-      <div class="abas" id="orcamentos">
-        <input type="radio" name="orc" id="or-1">
-        <input type="radio" name="orc" id="or-2">
-        <input type="radio" name="orc" id="or-3" checked>
-        <input type="radio" name="orc" id="or-4">
-        <input type="radio" name="orc" id="or-5">
-        <input type="radio" name="orc" id="or-6">
-        <input type="radio" name="orc" id="or-7">
-        <input type="radio" name="orc" id="or-8">
-        <input type="radio" name="orc" id="or-9">
-        <input type="radio" name="orc" id="or-10">
-
-        <div class="orc-pills">
-          <label class="orc-pill" for="or-1"><span class="cod">Cod: 145012.01</span>10 un · Dorso Colado · 100 pgs<span class="total">Total R$ 1.000</span></label>
-          <label class="orc-pill" for="or-2"><span class="cod">Cod: 145012.02</span>10 un · Dorso Colado · 200 pgs<span class="total">Total R$ 1.400</span></label>
-          <label class="orc-pill" for="or-3"><span class="cod">Cod: 145012.03</span>50 un · Dorso Colado · 100 pgs<span class="total">Total R$ 2.570</span></label>
-          <label class="orc-pill" for="or-4"><span class="cod">Cod: 145012.04</span>50 un · Dorso Colado · 200 pgs<span class="total">Total R$ 3.450</span></label>
-          <label class="orc-pill" for="or-5"><span class="cod">Cod: 145012.05</span>100 un · Dorso Colado · 100 pgs<span class="total">Total R$ 3.095</span></label>
-          <label class="orc-pill" for="or-6"><span class="cod">Cod: 145012.06</span>100 un · Dorso Colado · 200 pgs<span class="total">Total R$ 4.400</span></label>
-          <label class="orc-pill" for="or-7"><span class="cod">Cod: 145012.07</span>200 un · Capa Dura · 100 pgs<span class="total">Total R$ 6.170</span></label>
-          <label class="orc-pill" for="or-8"><span class="cod">Cod: 145012.08</span>100 un · Capa Dura · 100 pgs<span class="total">Total R$ 4.270</span></label>
-          <label class="orc-pill" for="or-9"><span class="cod">Cod: 145012.09</span>50 un · Capa Dura · 100 pgs<span class="total">Total R$ 3.200</span></label>
-          <label class="orc-pill" for="or-10"><span class="cod">Cod: 145012.10</span>50 un · Capa Dura · 200 pgs<span class="total">Total R$ 4.450</span></label>
+  <!-- ================= SIMULADOR DE ORÇAMENTOS ================= -->
+  <section id="simulador" class="claro">
+    <div class="wrap reveal">
+      <span class="kicker">Calculadora Operacional</span>
+      <h2>Simulador Real de Orçamentos</h2>
+      <p class="lead">Monte a configuração do livro e a ficha técnica se preenche sozinha — os valores vêm de 10
+        orçamentos gráficos reais extraídos das propostas de lote (nº 145012).</p>
+      <div class="formula-grid">
+        <div>
+          <div class="escolha">
+            <span>1 · Tipo de acabamento</span>
+            <div class="chips-escolha" id="esc-acab">
+              <button data-v="dorso" class="ativo">Dorso Colado</button>
+              <button data-v="dura">Capa Dura</button>
+            </div>
+          </div>
+          <div class="escolha">
+            <span>2 · Quantidade de exemplares</span>
+            <div class="chips-escolha" id="esc-un">
+              <button data-v="10">10</button>
+              <button data-v="50" class="ativo">50</button>
+              <button data-v="100">100</button>
+              <button data-v="200">200</button>
+            </div>
+          </div>
+          <div class="escolha">
+            <span>3 · Páginas do miolo</span>
+            <div class="chips-escolha" id="esc-pg">
+              <button data-v="100" class="ativo">100 páginas</button>
+              <button data-v="200">200 páginas</button>
+            </div>
+          </div>
+          <p class="nota-combos">As combinações riscadas não constam nas 10 propostas reais do lote 145012 — o
+            simulador exibe apenas orçamentos efetivamente cotados na gráfica. Pagamento em todos: 14 dias em boleto.</p>
         </div>
-
-        <div class="paineis">
-          <!-- 145012.01 -->
-          <article class="ficha">
-            <div class="ficha-topo">
-              <div><span class="proposta">Proposta Nº 145012.01</span><h4>Ficha Técnica do Livro</h4></div>
-              <span class="chip">10 unidades</span>
-            </div>
-            <div class="ficha-corpo">
-              <div class="par">
-                <div class="campo"><b>Tipo de Acabamento</b><span>Dorso Colado</span></div>
-                <div class="campo"><b>Forma de Pagamento</b><span>14 dias em boleto</span></div>
-              </div>
-              <div class="campo"><b>Configuração de Capa</b><p>31x21cm, 4x0 cores em Couche Fosco FSC 300g. Arte Fornecida pelo Cliente. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Configuração de Miolo</b><p>100 pgs, 15x21cm, 1 cor em Off Set Alto Alvura Suzano 75g. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Lombada &amp; Colagem</b><p>4mm, Laminado Fosco, Nº lados 1(Capa), Vinco(Capa), Intercalação(Miolo), Colagem PUR, FRETE, FOB (Destinatário).</p></div>
-            </div>
-            <div class="ficha-total">
-              <div class="total-unit"><b>Valor Unitário</b><span class="valor">R$ 100,00</span></div>
-              <div class="total-lote"><b>Investimento Total do Lote</b><span class="valor">R$ 1.000,00</span></div>
-            </div>
-          </article>
-
-          <!-- 145012.02 -->
-          <article class="ficha">
-            <div class="ficha-topo">
-              <div><span class="proposta">Proposta Nº 145012.02</span><h4>Ficha Técnica do Livro</h4></div>
-              <span class="chip">10 unidades</span>
-            </div>
-            <div class="ficha-corpo">
-              <div class="par">
-                <div class="campo"><b>Tipo de Acabamento</b><span>Dorso Colado</span></div>
-                <div class="campo"><b>Forma de Pagamento</b><span>14 dias em boleto</span></div>
-              </div>
-              <div class="campo"><b>Configuração de Capa</b><p>31x21cm, 4x0 cores em Couche Fosco FSC 300g. Arte Fornecida pelo Cliente. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Configuração de Miolo</b><p>200 pgs, 15x21cm, 1 cor em Off Set Alto Alvura Suzano 75g. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Lombada &amp; Colagem</b><p>8mm, Laminado Fosco, Nº lados 1(Capa), Vinco(Capa), Intercalação(Miolo), Colagem PUR, FRETE, FOB (Destinatário).</p></div>
-            </div>
-            <div class="ficha-total">
-              <div class="total-unit"><b>Valor Unitário</b><span class="valor">R$ 140,00</span></div>
-              <div class="total-lote"><b>Investimento Total do Lote</b><span class="valor">R$ 1.400,00</span></div>
-            </div>
-          </article>
-
-          <!-- 145012.03 -->
-          <article class="ficha">
-            <div class="ficha-topo">
-              <div><span class="proposta">Proposta Nº 145012.03</span><h4>Ficha Técnica do Livro</h4></div>
-              <span class="chip">50 unidades</span>
-            </div>
-            <div class="ficha-corpo">
-              <div class="par">
-                <div class="campo"><b>Tipo de Acabamento</b><span>Dorso Colado</span></div>
-                <div class="campo"><b>Forma de Pagamento</b><span>14 dias em boleto</span></div>
-              </div>
-              <div class="campo"><b>Configuração de Capa</b><p>31x21cm, 4x0 cores em Couche Fosco FSC 300g. Arte Fornecida pelo Cliente. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Configuração de Miolo</b><p>100 pgs, 15x21cm, 1 cor, Preto em Off Set Alto Alvura Suzano 75g. CTP Incluso. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Lombada &amp; Colagem</b><p>4mm, Laminado Fosco, Nº lados 1(Capa), Vinco(Capa), Dobradeira Automática, Intercalação, Colagem Dorso Hot Melt, Colagem PUR, FRETE, FOB (Destinatário).</p></div>
-            </div>
-            <div class="ficha-total">
-              <div class="total-unit"><b>Valor Unitário</b><span class="valor">R$ 51,40</span></div>
-              <div class="total-lote"><b>Investimento Total do Lote</b><span class="valor">R$ 2.570,00</span></div>
-            </div>
-          </article>
-
-          <!-- 145012.04 -->
-          <article class="ficha">
-            <div class="ficha-topo">
-              <div><span class="proposta">Proposta Nº 145012.04</span><h4>Ficha Técnica do Livro</h4></div>
-              <span class="chip">50 unidades</span>
-            </div>
-            <div class="ficha-corpo">
-              <div class="par">
-                <div class="campo"><b>Tipo de Acabamento</b><span>Dorso Colado</span></div>
-                <div class="campo"><b>Forma de Pagamento</b><span>14 dias em boleto</span></div>
-              </div>
-              <div class="campo"><b>Configuração de Capa</b><p>31x21cm, 4x0 cores em Couche Fosco FSC 300g. Arte Fornecida pelo Cliente. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Configuração de Miolo</b><p>200 pgs, 15x21cm, 1 cor, Preto em Off Set Alto Alvura Suzano 75g. CTP Incluso. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Lombada &amp; Colagem</b><p>8mm, Laminado Fosco, Nº lados 1(Capa), Vinco(Capa), Dobradeira Automática, Intercalação, Colagem Dorso Hot Melt, Colagem PUR, FRETE, FOB (Destinatário).</p></div>
-            </div>
-            <div class="ficha-total">
-              <div class="total-unit"><b>Valor Unitário</b><span class="valor">R$ 69,00</span></div>
-              <div class="total-lote"><b>Investimento Total do Lote</b><span class="valor">R$ 3.450,00</span></div>
-            </div>
-          </article>
-
-          <!-- 145012.05 -->
-          <article class="ficha">
-            <div class="ficha-topo">
-              <div><span class="proposta">Proposta Nº 145012.05</span><h4>Ficha Técnica do Livro</h4></div>
-              <span class="chip">100 unidades</span>
-            </div>
-            <div class="ficha-corpo">
-              <div class="par">
-                <div class="campo"><b>Tipo de Acabamento</b><span>Dorso Colado</span></div>
-                <div class="campo"><b>Forma de Pagamento</b><span>14 dias em boleto</span></div>
-              </div>
-              <div class="campo"><b>Configuração de Capa</b><p>31x21cm, 4x0 cores em Couche Fosco FSC 300g. Arte Fornecida pelo Cliente. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Configuração de Miolo</b><p>100 pgs, 15x21cm, 1 cor, Preto em Off Set Alto Alvura Suzano 75g. CTP Incluso. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Lombada &amp; Colagem</b><p>4mm, Laminado Fosco, Nº lados 1(Capa), Vinco(Capa), Dobradeira Automática, Intercalação, Colagem Dorso Hot Melt, Colagem PUR, FRETE, FOB (Destinatário).</p></div>
-            </div>
-            <div class="ficha-total">
-              <div class="total-unit"><b>Valor Unitário</b><span class="valor">R$ 30,95</span></div>
-              <div class="total-lote"><b>Investimento Total do Lote</b><span class="valor">R$ 3.095,00</span></div>
-            </div>
-          </article>
-
-          <!-- 145012.06 -->
-          <article class="ficha">
-            <div class="ficha-topo">
-              <div><span class="proposta">Proposta Nº 145012.06</span><h4>Ficha Técnica do Livro</h4></div>
-              <span class="chip">100 unidades</span>
-            </div>
-            <div class="ficha-corpo">
-              <div class="par">
-                <div class="campo"><b>Tipo de Acabamento</b><span>Dorso Colado</span></div>
-                <div class="campo"><b>Forma de Pagamento</b><span>14 dias em boleto</span></div>
-              </div>
-              <div class="campo"><b>Configuração de Capa</b><p>31x21cm, 4x0 cores em Couche Fosco FSC 300g. Arte Fornecida pelo Cliente. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Configuração de Miolo</b><p>200 pgs, 15x21cm, 1 cor, Preto em Off Set Alto Alvura Suzano 75g. CTP Incluso. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Lombada &amp; Colagem</b><p>8mm, Laminado Fosco, Nº lados 1(Capa), Vinco(Capa), Dobradeira Automática, Intercalação, Colagem Dorso Hot Melt, Colagem PUR, FRETE, FOB (Destinatário).</p></div>
-            </div>
-            <div class="ficha-total">
-              <div class="total-unit"><b>Valor Unitário</b><span class="valor">R$ 44,00</span></div>
-              <div class="total-lote"><b>Investimento Total do Lote</b><span class="valor">R$ 4.400,00</span></div>
-            </div>
-          </article>
-
-          <!-- 145012.07 -->
-          <article class="ficha">
-            <div class="ficha-topo">
-              <div><span class="proposta">Proposta Nº 145012.07</span><h4>Ficha Técnica do Livro</h4></div>
-              <span class="chip">200 unidades</span>
-            </div>
-            <div class="ficha-corpo">
-              <div class="par">
-                <div class="campo"><b>Tipo de Acabamento</b><span>Capa Dura</span></div>
-                <div class="campo"><b>Forma de Pagamento</b><span>14 dias em boleto</span></div>
-              </div>
-              <div class="campo"><b>Configuração de Capa</b><p>Revest. Capa: 25x35cm, 4x1 cores, Tinta Escala em Couche Fosco FSC LD 170g. Arte Fornecida pelo Cliente. CTP Incluso. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Configuração de Miolo</b><p>100 pgs, 15x21cm, 1 cor, Preto em Off Set Alto Alvura Suzano 75g. CTP Incluso. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Lombada &amp; Colagem</b><p>6mm, Laminação Alto Brilho, Nº lados 1(Revest. Capa), Capa Dura(Revest. Capa), Dobradeira Automática(Papelão), Intercalação(Papelão), Colagem PUR, FRETE, FOB (Destinatário).</p></div>
-            </div>
-            <div class="ficha-total">
-              <div class="total-unit"><b>Valor Unitário</b><span class="valor">R$ 30,85</span></div>
-              <div class="total-lote"><b>Investimento Total do Lote</b><span class="valor">R$ 6.170,00</span></div>
-            </div>
-          </article>
-
-          <!-- 145012.08 -->
-          <article class="ficha">
-            <div class="ficha-topo">
-              <div><span class="proposta">Proposta Nº 145012.08</span><h4>Ficha Técnica do Livro</h4></div>
-              <span class="chip">100 unidades</span>
-            </div>
-            <div class="ficha-corpo">
-              <div class="par">
-                <div class="campo"><b>Tipo de Acabamento</b><span>Capa Dura</span></div>
-                <div class="campo"><b>Forma de Pagamento</b><span>14 dias em boleto</span></div>
-              </div>
-              <div class="campo"><b>Configuração de Capa</b><p>Revest. Capa: 25x35cm, 4x1 cores, Tinta Escala em Couche Fosco FSC LD 170g. Arte Fornecida pelo Cliente. CTP Incluso. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Configuração de Miolo</b><p>100 pgs, 15x21cm, 1 cor, Preto em Off Set Alto Alvura Suzano 75g. CTP Incluso. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Lombada &amp; Colagem</b><p>6mm, Laminado Fosco, Nº lados 1(Revest. Capa), Capa Dura(Revest. Capa), Dobradeira Automática(Papelão), Intercalação(Papelão), Colagem PUR, FRETE, FOB (Destinatário).</p></div>
-            </div>
-            <div class="ficha-total">
-              <div class="total-unit"><b>Valor Unitário</b><span class="valor">R$ 42,70</span></div>
-              <div class="total-lote"><b>Investimento Total do Lote</b><span class="valor">R$ 4.270,00</span></div>
-            </div>
-          </article>
-
-          <!-- 145012.09 -->
-          <article class="ficha">
-            <div class="ficha-topo">
-              <div><span class="proposta">Proposta Nº 145012.09</span><h4>Ficha Técnica do Livro</h4></div>
-              <span class="chip">50 unidades</span>
-            </div>
-            <div class="ficha-corpo">
-              <div class="par">
-                <div class="campo"><b>Tipo de Acabamento</b><span>Capa Dura</span></div>
-                <div class="campo"><b>Forma de Pagamento</b><span>14 dias em boleto</span></div>
-              </div>
-              <div class="campo"><b>Configuração de Capa</b><p>Revest. Capa: 25x35cm, 4x1 cores em Couche Fosco FSC LD 170g. Arte Fornecida pelo Cliente. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Configuração de Miolo</b><p>100 pgs, 15x21cm, 1 cor, Preto em Off Set Alto Alvura Suzano 75g. CTP Incluso. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Lombada &amp; Colagem</b><p>6mm, Laminação Alto Brilho, Nº lados 1(Revest. Capa), Capa Dura(Revest. Capa), Dobradeira Automática(Papelão), Intercalação(Papelão), Colagem PUR, FRETE, FOB (Destinatário).</p></div>
-            </div>
-            <div class="ficha-total">
-              <div class="total-unit"><b>Valor Unitário</b><span class="valor">R$ 64,00</span></div>
-              <div class="total-lote"><b>Investimento Total do Lote</b><span class="valor">R$ 3.200,00</span></div>
-            </div>
-          </article>
-
-          <!-- 145012.10 -->
-          <article class="ficha">
-            <div class="ficha-topo">
-              <div><span class="proposta">Proposta Nº 145012.10</span><h4>Ficha Técnica do Livro</h4></div>
-              <span class="chip">50 unidades</span>
-            </div>
-            <div class="ficha-corpo">
-              <div class="par">
-                <div class="campo"><b>Tipo de Acabamento</b><span>Capa Dura</span></div>
-                <div class="campo"><b>Forma de Pagamento</b><span>14 dias em boleto</span></div>
-              </div>
-              <div class="campo"><b>Configuração de Capa</b><p>Revest. Capa: 25x35cm, 4x1 cores em Couche Fosco FSC LD 170g. Arte Fornecida pelo Cliente. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Configuração de Miolo</b><p>200 pgs, 15x21cm, 1 cor, Preto em Off Set Alto Alvura Suzano 75g. CTP Incluso. Prova Digital Konica Minolta.</p></div>
-              <div class="campo"><b>Lombada &amp; Colagem</b><p>9mm, Laminação Alto Brilho, Nº lados 1(Revest. Capa), Capa Dura(Revest. Capa), Dobradeira Automática(Papelão), Intercalação(Papelão), Colagem PUR, FRETE, FOB (Destinatário).</p></div>
-            </div>
-            <div class="ficha-total">
-              <div class="total-unit"><b>Valor Unitário</b><span class="valor">R$ 89,00</span></div>
-              <div class="total-lote"><b>Investimento Total do Lote</b><span class="valor">R$ 4.450,00</span></div>
-            </div>
-          </article>
+        <div class="saida" aria-live="polite">
+          <span class="proposta" id="orc-proposta">Proposta Nº 145012.03</span>
+          <h3>Ficha Técnica do Livro</h3>
+          <div class="campo-ficha"><b>Configuração de Capa</b><p id="orc-capa">31x21cm, 4x0 cores em Couche Fosco FSC 300g. Arte Fornecida pelo Cliente. Prova Digital Konica Minolta.</p></div>
+          <div class="campo-ficha"><b>Configuração de Miolo</b><p id="orc-miolo">100 pgs, 15x21cm, 1 cor, Preto em Off Set Alto Alvura Suzano 75g. CTP Incluso. Prova Digital Konica Minolta.</p></div>
+          <div class="campo-ficha"><b>Lombada &amp; Colagem</b><p id="orc-lombada">4mm, Laminado Fosco, Nº lados 1(Capa), Vinco(Capa), Dobradeira Automática, Intercalação, Colagem Dorso Hot Melt, Colagem PUR, FRETE, FOB (Destinatário).</p></div>
+          <div class="totais">
+            <div><b>Valor unitário</b><span class="valor" id="orc-unit">R$ 51,40</span></div>
+            <div><b>Total do lote</b><span class="valor" id="orc-total">R$ 2.570,00</span></div>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ================= IMPLEMENTAÇÃO ================= -->
-    <section id="implementacao" class="box box-lavanda">
-      <div class="section-head">
-        <span class="kicker">Ciclo de Viabilidade</span>
-        <h3>Diagrama de Implementação</h3>
-        <p>5 passos fundamentais para viabilidade técnica do e-commerce de e-books</p>
+  <!-- ================= IMPLEMENTAÇÃO ================= -->
+  <section id="implementacao" class="claro-2">
+    <div class="wrap reveal">
+      <span class="kicker">Ciclo de Viabilidade</span>
+      <h2>Diagrama de Implementação</h2>
+      <p class="lead">5 passos fundamentais para viabilidade técnica do e-commerce de e-books. Clique em cada carta
+        para revelar.</p>
+      <div class="cartas">
+        <button class="carta" aria-label="Passo 1: Viabilidade — clique para revelar"><div class="carta-in">
+          <div class="face frente"><span class="n">01</span><h3>Viabilidade do E-commerce</h3></div>
+          <div class="face tras">Estudar a viabilidade de um e-commerce para comercialização dos livros produzidos pela editora.</div>
+        </div></button>
+        <button class="carta" aria-label="Passo 2: Aditivo de contrato — clique para revelar"><div class="carta-in">
+          <div class="face frente"><span class="n">02</span><h3>Aditivo de Contrato</h3></div>
+          <div class="face tras">Elaborar o aditivo de contrato e sensibilização dos docentes para assinatura. Repasse para o docente pela venda.</div>
+        </div></button>
+        <button class="carta" aria-label="Passo 3: Plataformas digitais — clique para revelar"><div class="carta-in">
+          <div class="face frente"><span class="n">03</span><h3>Plataformas Digitais</h3></div>
+          <div class="face tras">Verificar as plataformas que poderíamos utilizar para a venda dos e-books, como Amazon, para assinatura de contratos.</div>
+        </div></button>
+        <button class="carta" aria-label="Passo 4: Plataformas de diagramação — clique para revelar"><div class="carta-in">
+          <div class="face frente"><span class="n">04</span><h3>Plataformas de Diagramação</h3></div>
+          <div class="face tras">Identificar o formato de diagramação dos e-books para a comercialização em plataformas digitais.</div>
+        </div></button>
+        <button class="carta" aria-label="Passo 5: Diagramação dos materiais — clique para revelar"><div class="carta-in">
+          <div class="face frente"><span class="n">05</span><h3>Diagramação dos Materiais</h3></div>
+          <div class="face tras">Ajustar a diagramação para disponibilização nas plataformas.</div>
+        </div></button>
       </div>
-      <ol class="etapas">
-        <li><span class="num">01</span>
-          <div><b>Estudar a Viabilidade de um e-commerce</b>
-            <p>Para comercialização dos livros produzidos pela editora</p></div>
-        </li>
-        <li><span class="num">02</span>
-          <div><b>Aditivo de Contrato</b>
-            <p>Elaborar o aditivo de contrato e sensibilização dos docentes para assinatura. Repasse para o docente
-              pela venda.</p></div>
-        </li>
-        <li><span class="num">03</span>
-          <div><b>Plataformas Digitais</b>
-            <p>Verificar as plataformas que poderíamos utilizar para a venda dos e-books, como Amazon para
-              assinatura de contratos.</p></div>
-        </li>
-        <li><span class="num">04</span>
-          <div><b>Plataformas de Diagramação</b>
-            <p>Identificar o formato de diagramação dos e-books para a comercialização em plataformas digitais</p></div>
-        </li>
-        <li><span class="num">05</span>
-          <div><b>Diagramação dos Materiais</b>
-            <p>Ajustar a diagramação para disponibilização nas plataformas</p></div>
-        </li>
-      </ol>
-    </section>
+      <p class="dica-flip">Do estudo de viabilidade à publicação: cada etapa destrava a seguinte.</p>
+    </div>
+  </section>
 
-    <!-- ================= COLETÂNEAS ================= -->
-    <section id="coletaneas" class="box box-menta">
-      <div class="section-head">
-        <span class="kicker">Cronograma Geral</span>
-        <h3>Produção de Coletâneas</h3>
-        <p>Planejamento cronológico estruturado para as duas coletâneas em parcerias acadêmicas</p>
-      </div>
-
-      <div class="abas">
-        <input type="radio" name="col" id="col-1" checked>
-        <input type="radio" name="col" id="col-2">
-        <input type="radio" name="col" id="col-3">
-        <input type="radio" name="col" id="col-4">
-
-        <div class="col-pills">
-          <label class="col-pill" for="col-1"><span class="data">2026/04</span><span class="nome">Definição das Temáticas</span></label>
-          <label class="col-pill" for="col-2"><span class="data">2027/01</span><span class="nome">Contratação dos Autores</span></label>
-          <label class="col-pill" for="col-3"><span class="data">2027/02</span><span class="nome">Edição</span></label>
-          <label class="col-pill" for="col-4"><span class="data">2027/03</span><span class="nome">Lançamento</span></label>
-        </div>
-
-        <div class="paineis">
-          <article class="col-painel">
+  <!-- ================= COLETÂNEAS ================= -->
+  <section id="coletaneas" class="claro">
+    <div class="wrap reveal">
+      <span class="kicker">Cronograma Geral</span>
+      <h2>Produção de Coletâneas</h2>
+      <p class="lead">Planejamento cronológico estruturado para as duas coletâneas em parcerias acadêmicas — de
+        2026/04 até o lançamento na biblioteca em 2027/03.</p>
+      <div class="ag-passos">
+        <div class="ag-passo">
+          <div class="ag-num">1</div>
+          <div class="ag-corpo">
             <span class="data">2026/04</span>
-            <h4>Definição das Temáticas</h4>
+            <h3>Definição das Temáticas</h3>
             <ul>
-              <li>Definir as temáticas das duas coletâneas,</li>
+              <li>Definir as temáticas das duas coletâneas</li>
               <li>Organização dos Contratos e Fluxos</li>
             </ul>
-          </article>
-          <article class="col-painel">
+          </div>
+        </div>
+        <div class="ag-passo">
+          <div class="ag-num">2</div>
+          <div class="ag-corpo">
             <span class="data">2027/01</span>
-            <h4>Contratação dos Autores</h4>
+            <h3>Contratação dos Autores</h3>
             <ul>
               <li>Contratação dos Autores</li>
               <li>Solicitar Bio e Fotos</li>
               <li>Proposta da Capa</li>
               <li>Material de Divulgação</li>
             </ul>
-          </article>
-          <article class="col-painel">
+          </div>
+        </div>
+        <div class="ag-passo">
+          <div class="ag-num">3</div>
+          <div class="ag-corpo">
             <span class="data">2027/02</span>
-            <h4>Edição</h4>
+            <h3>Edição</h3>
             <ul>
-              <li>Entrega dos Capítulos para revisão,</li>
+              <li>Entrega dos Capítulos para revisão</li>
               <li>Edição do Livro / Revisão</li>
               <li>Agendamento do Lançamento (orientações)</li>
               <li>Impressões dos Livros</li>
             </ul>
-          </article>
-          <article class="col-painel">
+          </div>
+        </div>
+        <div class="ag-passo ag-final">
+          <div class="ag-num">✓</div>
+          <div class="ag-corpo">
             <span class="data">2027/03</span>
-            <h4>Lançamento</h4>
+            <h3>Lançamento</h3>
             <ul>
               <li>Aproveitar a decoração da festa de aniversário para o lançamento (dia anterior / posterior)</li>
               <li>Lançamento na Biblioteca</li>
               <li>Organizar lançamento nas bibliotecas (cidades dos autores)</li>
             </ul>
-          </article>
+          </div>
         </div>
       </div>
+      <p class="meta-caixa"><b>Meta Estratégica das Coletâneas:</b> Estimular e gerenciar a produção de livros
+        compostos com temáticas centrais e com contribuição de diferentes autores acadêmicos.</p>
+    </div>
+  </section>
 
-      <p class="meta"><b>Meta Estratégica das Coletâneas:</b> Estimular e gerenciar a produção de livros compostos
-        com temáticas centras e com contribuição de diferentes autores acadêmicos.</p>
-    </section>
-
-    <!-- ================= PRODUTOS & SALÁRIOS ================= -->
-    <div class="duas-colunas">
-      <section id="produtos" class="box box-lavanda">
-        <div class="section-head">
-          <span class="kicker">Catálogo e Serviços</span>
-          <h3>Produtos e Serviços</h3>
-          <p>Diagramação de e-books e coletâneas para docentes</p>
-        </div>
-        <div class="painel produto">
-          <h4>1. E-books (Materiais Didáticos)</h4>
+  <!-- ================= PRODUTOS ================= -->
+  <section id="produtos" class="claro-2">
+    <div class="wrap reveal">
+      <span class="kicker">Catálogo e Serviços</span>
+      <h2>Produtos e Serviços</h2>
+      <p class="lead">Diagramação de e-books e coletâneas para docentes, com estratégia de expansão literária.</p>
+      <div class="produtos-grid">
+        <article class="produto">
+          <h3>1. E-books (Materiais Didáticos)</h3>
           <p>Diagramação dos materiais personalizados produzidos pela Fábrica de Conteúdos para oferta nas
             plataformas de venda (como Amazon) em formato e-book.</p>
-          <span class="nota">Sugestão de repasse para autores: 15%</span>
-        </div>
-        <div class="painel produto">
-          <h4>2. Produção de Coletâneas (Livros com Capítulos de Diferentes Autores)</h4>
-          <p>Estimular a produção de livros focados em temáticas centrais, agregando diferentes autores regionais e
-            acadêmicos na mesma obra.</p>
-        </div>
-        <div class="painel produto">
-          <h4 class="roxo">3. Expansão Literária — Lançamentos Individuais</h4>
+          <span class="nota">Repasse sugerido para autores: 15%</span>
+        </article>
+        <article class="produto">
+          <h3>2. Produção de Coletâneas</h3>
+          <p>Estimular a produção de livros focados em temáticas centrais (livros com capítulos de diferentes
+            autores), agregando diferentes autores regionais e acadêmicos na mesma obra.</p>
+        </article>
+        <article class="produto">
+          <h3>3. Expansão Literária — Lançamentos Individuais</h3>
           <p>Estratégia de expansão focada em futuros lançamentos individuais por gênero literário:</p>
           <div class="generos">
             <span>Romance</span><span>Fantasia</span><span>Ficção científica</span>
             <span>Suspense / Policial</span><span>Terror</span><span>Distopia</span><span>Aventura</span>
           </div>
-        </div>
-      </section>
-
-      <section id="salarios" class="box box-menta">
-        <div class="section-head">
-          <span class="kicker">Recursos Humanos</span>
-          <h3>Pesquisa de Cargos e Salários</h3>
-          <p>Status operacional e levantamento de despesas de pessoal</p>
-        </div>
-
-        <div class="painel aviso" style="margin-bottom:14px">
-          <svg class="ic"><use href="#i-info"/></svg>
-          <div>
-            <p>Pesquisa de cargos e salários da Editoria para levantamento de custos de pessoal.</p>
-            <span class="status">NOTA TÉCNICA: CARGO DE EDITORA — VALOR: R$ 3.600,00</span>
-
-            <!-- Relatório completo (antes exibido em modal) -->
-            <details class="relatorio">
-              <summary><svg class="ic"><use href="#i-arquivo"/></svg> Visualizar Pesquisa de Salários</summary>
-              <div class="relatorio-corpo">
-                <header>
-                  <h4>Pesquisa de Mercado — Editor de Livros</h4>
-                  <p>Análise de remunerações, cargos e referências nacionais para a operação editorial.<br>
-                    UNICIVE — Centro Universitário Cidade Verde · Maringá, PR · 2026</p>
-                </header>
-
-                <div>
-                  <h5>1. Visão Geral: Pesquisa de Mercado Vagas</h5>
-                  <p class="explica">Levantamento amostral de vagas ativas no mercado nacional para profissionais
-                    da área editorial em canais de recrutamento online. Todas as vagas: modalidade híbrida,
-                    plataforma beBee.</p>
-                  <ul class="lista-vagas">
-                    <li>
-                      <div class="vaga-info"><b>Editor / Gestor de Produção Editorial</b><span>Microkids Tecnologia Educacional</span></div>
-                      <span class="salario">R$ 13.000,00</span>
-                    </li>
-                    <li>
-                      <div class="vaga-info"><b>Pessoa Editora Assistente Pleno Matemática — PNLD</b><span>FTD Educação</span></div>
-                      <span class="salario">R$ 1.000 – R$ 12.000</span>
-                    </li>
-                    <li>
-                      <div class="vaga-info"><b>Pessoa Editora de Conteúdo Digital Jr. | Ciências da Natureza</b><span>FTD Educação</span></div>
-                      <span class="salario">R$ 2.900 – R$ 4.000</span>
-                    </li>
-                    <li>
-                      <div class="vaga-info"><b>Pessoa Editora de Avaliações — Ciências da Natureza</b><span>Arco Educação</span></div>
-                      <span class="salario">R$ 4.600 – R$ 7.000</span>
-                    </li>
-                    <li>
-                      <div class="vaga-info"><b>Pessoa Editora de Avaliações — Linguagens</b><span>Arco Educação</span></div>
-                      <span class="salario">R$ 4.600 – R$ 7.000</span>
-                    </li>
-                    <li>
-                      <div class="vaga-info"><b>Pessoa Editora Assistente Pleno I Avaliação</b><span>FTD Educação</span></div>
-                      <span class="salario">R$ 1.000 – R$ 12.000</span>
-                    </li>
-                    <li>
-                      <div class="vaga-info"><b>Pessoa Editora Assistente Pleno | São Paulo</b><span>FTD Educação</span></div>
-                      <span class="salario">R$ 2.100 – R$ 27.000</span>
-                    </li>
-                    <li>
-                      <div class="vaga-info"><b>Pessoa Editora Assistente PL — História</b><span>FTD Educação</span></div>
-                      <span class="salario">R$ 8.750 – R$ 39.500</span>
-                    </li>
-                    <li>
-                      <div class="vaga-info"><b>Pessoa Editora Assistente JR — PNLD — Matemática</b><span>FTD Educação</span></div>
-                      <span class="salario">R$ 1.250 – R$ 1.600</span>
-                    </li>
-                    <li>
-                      <div class="vaga-info"><b>Pessoa Editora SR — História | PNLD</b><span>Netvagas</span></div>
-                      <span class="salario">R$ 6.000 – R$ 9.000</span>
-                    </li>
-                    <li>
-                      <div class="vaga-info"><b>Pessoa Editora de Conteúdo Bilíngue</b><span>Arco Educação</span></div>
-                      <span class="salario">R$ 1.500 – R$ 3.000</span>
-                    </li>
-                    <li>
-                      <div class="vaga-info"><b>Pessoa Editora Assistente Pleno I Idiomas</b><span>FTD Educação</span></div>
-                      <span class="salario">R$ 1.000 – R$ 12.000</span>
-                    </li>
-                  </ul>
-                  <p class="fonte">Quadro 1</p>
-                </div>
-
-                <div>
-                  <h5>2. Referência salarial nacional (CBO 2616-10 — Editor de Livro)</h5>
-                  <p class="explica">Referência consolidada para a
-                    ocupação de Editor de Livro com dados regulamentados e contratações oficiais vigentes no
-                    território nacional.</p>
-                  <div class="tabela-scroll">
-                    <table>
-                      <thead><tr><th>Indicador</th><th>Valor de Referência</th></tr></thead>
-                      <tbody>
-                        <tr><td>Média salarial</td><td>R$ 6.563 / mês</td></tr>
-                        <tr><td>Mediana</td><td>R$ 5.949 / mês</td></tr>
-                        <tr><td>Piso (acordos coletivos)</td><td>R$ 9.111 / mês</td></tr>
-                        <tr><td>Teto salarial</td><td>R$ 11.632 / mês</td></tr>
-                        <tr><td>Jornada média</td><td>42h / semana</td></tr>
-                        <tr><td>Regime contratual</td><td>CLT (Consolidação das Leis do Trabalho)</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <p class="fonte">Quadro 2</p>
-                </div>
-
-                <div>
-                  <h5>3. Referências salariais consolidadas</h5>
-                  <p class="explica">Comparativo direto por cargo
-                    editorial e fonte de apuração de mercado, considerando contratações em regime CLT na região de
-                    São Paulo e nível nacional.</p>
-                  <ul class="lista-vagas">
-                    <li>
-                      <div class="vaga-info"><b>Editor de Livro (CBO 2616-10)</b><span>Portal Salário / CAGED · 42h/sem</span></div>
-                      <span class="salario">R$ 6.645 média · R$ 9.167 piso</span>
-                    </li>
-                    <li>
-                      <div class="vaga-info"><b>Editor Assistente (SP)</b><span>Portal Salário / CAGED · 44h/sem</span></div>
-                      <span class="salario">R$ 4.275 – R$ 12.364</span>
-                    </li>
-                    <li>
-                      <div class="vaga-info"><b>Assistente Editorial (SP)</b><span>Portal Salário / CAGED · 38h/sem</span></div>
-                      <span class="salario">R$ 4.782 mediana · R$ 5.996 piso</span>
-                    </li>
-                    <li>
-                      <div class="vaga-info"><b>Editor (geral)</b><span>Glassdoor · 1.221 relatos</span></div>
-                      <span class="salario">R$ 3.000 – R$ 7.000</span>
-                    </li>
-                  </ul>
-                  <p class="fonte">Quadro 3</p>
-                </div>
-
-                <p class="conclusao">Os dados demonstram que as remunerações praticadas no mercado editorial oscilam
-                  de R$ 3.000,00 a R$ 13.000,00. Com base no diagnóstico local e na política de enquadramento da
-                  instituição, define-se para o cargo de Editora na Arbor Editora o valor de
-                  <strong>R$ 3.600,00 mensais</strong>, garantindo o alinhamento com a média inicial de mercado e
-                  viabilidade operacional do projeto.</p>
-              </div>
-            </details>
-          </div>
-        </div>
-
-        <div class="painel aviso" style="margin-bottom:14px">
-          <svg class="ic"><use href="#i-predio"/></svg>
-          <div>
-            <span class="status" style="margin-top:0">STATUS: EM FASE DE DESENVOLVIMENTO — ESCOPO</span>
-            <p style="margin-top:6px"><a href="https://canva.link/13i7yhxjbybjcjy" target="_blank" rel="noopener">
-              Visualizar a proposta de organograma <svg class="ic" style="width:12px;height:12px"><use href="#i-link"/></svg></a></p>
-          </div>
-        </div>
-
-        <div class="painel aviso">
-          <svg class="ic"><use href="#i-usuarios"/></svg>
-          <div>
-            <span class="status" style="margin-top:0">AÇÃO: CRIAR OS CARGOS E FAZER A DESCRIÇÃO — AGUARDAR O ORGANOGRAMA</span>
-          </div>
-        </div>
-      </section>
+        </article>
+      </div>
     </div>
+  </section>
 
-    <!-- ================= FINANCEIRO ================= -->
-    <section id="financeiro" class="box box-lavanda">
-      <div class="section-head">
-        <span class="kicker">Viabilidade Financeira</span>
-        <h2>Orçamento Global Estimado</h2>
-        <p>Previsão e demonstração de custos, despesas e receitas estimadas para 2027</p>
+  <!-- ================= SALÁRIOS ================= -->
+  <section id="salarios" class="claro">
+    <div class="wrap reveal">
+      <span class="kicker">Recursos Humanos</span>
+      <h2>Pesquisa de Cargos e Salários</h2>
+      <p class="lead">Status operacional e levantamento de despesas de pessoal para a operação editorial.</p>
+
+      <div class="aviso">
+        <svg class="ic"><use href="#i-info"/></svg>
+        <div>
+          <p>Pesquisa de cargos e salários da Editoria para levantamento de custos de pessoal.</p>
+          <span class="status">NOTA TÉCNICA: CARGO DE EDITORA — VALOR: R$ 3.600,00</span>
+        </div>
       </div>
 
+      <div style="margin-top:1rem">
+        <details class="acordeao">
+          <summary>Visualizar Pesquisa de Salários<span class="resumo">Editor de Livros — remunerações, cargos e referências nacionais · UNICIVE · Maringá, PR · 2026</span></summary>
+          <div class="corpo relatorio-corpo">
+            <header>
+              <h4>Pesquisa de Mercado — Editor de Livros</h4>
+              <p>Análise de remunerações, cargos e referências nacionais para a operação editorial.<br>
+                UNICIVE — Centro Universitário Cidade Verde · Maringá, PR · 2026</p>
+            </header>
+
+            <div>
+              <h5>1. Visão Geral: Pesquisa de Mercado Vagas</h5>
+              <p class="explica">Levantamento amostral de vagas ativas no mercado nacional para profissionais
+                da área editorial em canais de recrutamento online. Todas as vagas: modalidade híbrida,
+                plataforma beBee.</p>
+              <ul class="lista-vagas">
+                <li>
+                  <div class="vaga-info"><b>Editor / Gestor de Produção Editorial</b><span>Microkids Tecnologia Educacional</span></div>
+                  <span class="salario">R$ 13.000,00</span>
+                </li>
+                <li>
+                  <div class="vaga-info"><b>Pessoa Editora Assistente Pleno Matemática — PNLD</b><span>FTD Educação</span></div>
+                  <span class="salario">R$ 1.000 – R$ 12.000</span>
+                </li>
+                <li>
+                  <div class="vaga-info"><b>Pessoa Editora de Conteúdo Digital Jr. | Ciências da Natureza</b><span>FTD Educação</span></div>
+                  <span class="salario">R$ 2.900 – R$ 4.000</span>
+                </li>
+                <li>
+                  <div class="vaga-info"><b>Pessoa Editora de Avaliações — Ciências da Natureza</b><span>Arco Educação</span></div>
+                  <span class="salario">R$ 4.600 – R$ 7.000</span>
+                </li>
+                <li>
+                  <div class="vaga-info"><b>Pessoa Editora de Avaliações — Linguagens</b><span>Arco Educação</span></div>
+                  <span class="salario">R$ 4.600 – R$ 7.000</span>
+                </li>
+                <li>
+                  <div class="vaga-info"><b>Pessoa Editora Assistente Pleno I Avaliação</b><span>FTD Educação</span></div>
+                  <span class="salario">R$ 1.000 – R$ 12.000</span>
+                </li>
+                <li>
+                  <div class="vaga-info"><b>Pessoa Editora Assistente Pleno | São Paulo</b><span>FTD Educação</span></div>
+                  <span class="salario">R$ 2.100 – R$ 27.000</span>
+                </li>
+                <li>
+                  <div class="vaga-info"><b>Pessoa Editora Assistente PL — História</b><span>FTD Educação</span></div>
+                  <span class="salario">R$ 8.750 – R$ 39.500</span>
+                </li>
+                <li>
+                  <div class="vaga-info"><b>Pessoa Editora Assistente JR — PNLD — Matemática</b><span>FTD Educação</span></div>
+                  <span class="salario">R$ 1.250 – R$ 1.600</span>
+                </li>
+                <li>
+                  <div class="vaga-info"><b>Pessoa Editora SR — História | PNLD</b><span>Netvagas</span></div>
+                  <span class="salario">R$ 6.000 – R$ 9.000</span>
+                </li>
+                <li>
+                  <div class="vaga-info"><b>Pessoa Editora de Conteúdo Bilíngue</b><span>Arco Educação</span></div>
+                  <span class="salario">R$ 1.500 – R$ 3.000</span>
+                </li>
+                <li>
+                  <div class="vaga-info"><b>Pessoa Editora Assistente Pleno I Idiomas</b><span>FTD Educação</span></div>
+                  <span class="salario">R$ 1.000 – R$ 12.000</span>
+                </li>
+              </ul>
+              <p class="fonte">Quadro 1</p>
+            </div>
+
+            <div>
+              <h5>2. Referência salarial nacional (CBO 2616-10 — Editor de Livro)</h5>
+              <p class="explica">Referência consolidada para a
+                ocupação de Editor de Livro com dados regulamentados e contratações oficiais vigentes no
+                território nacional.</p>
+              <div class="tabela-scroll estreita">
+                <table>
+                  <thead><tr><th>Indicador</th><th>Valor de Referência</th></tr></thead>
+                  <tbody>
+                    <tr><td>Média salarial</td><td>R$ 6.563 / mês</td></tr>
+                    <tr><td>Mediana</td><td>R$ 5.949 / mês</td></tr>
+                    <tr><td>Piso (acordos coletivos)</td><td>R$ 9.111 / mês</td></tr>
+                    <tr><td>Teto salarial</td><td>R$ 11.632 / mês</td></tr>
+                    <tr><td>Jornada média</td><td>42h / semana</td></tr>
+                    <tr><td>Regime contratual</td><td>CLT (Consolidação das Leis do Trabalho)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="fonte">Quadro 2</p>
+            </div>
+
+            <div>
+              <h5>3. Referências salariais consolidadas</h5>
+              <p class="explica">Comparativo direto por cargo
+                editorial e fonte de apuração de mercado, considerando contratações em regime CLT na região de
+                São Paulo e nível nacional.</p>
+              <ul class="lista-vagas">
+                <li>
+                  <div class="vaga-info"><b>Editor de Livro (CBO 2616-10)</b><span>Portal Salário / CAGED · 42h/sem</span></div>
+                  <span class="salario">R$ 6.645 média · R$ 9.167 piso</span>
+                </li>
+                <li>
+                  <div class="vaga-info"><b>Editor Assistente (SP)</b><span>Portal Salário / CAGED · 44h/sem</span></div>
+                  <span class="salario">R$ 4.275 – R$ 12.364</span>
+                </li>
+                <li>
+                  <div class="vaga-info"><b>Assistente Editorial (SP)</b><span>Portal Salário / CAGED · 38h/sem</span></div>
+                  <span class="salario">R$ 4.782 mediana · R$ 5.996 piso</span>
+                </li>
+                <li>
+                  <div class="vaga-info"><b>Editor (geral)</b><span>Glassdoor · 1.221 relatos</span></div>
+                  <span class="salario">R$ 3.000 – R$ 7.000</span>
+                </li>
+              </ul>
+              <p class="fonte">Quadro 3</p>
+            </div>
+
+            <p class="conclusao">Os dados demonstram que as remunerações praticadas no mercado editorial oscilam
+              de R$ 3.000,00 a R$ 13.000,00. Com base no diagnóstico local e na política de enquadramento da
+              instituição, define-se para o cargo de Editora na Arbor Editora o valor de
+              <strong>R$ 3.600,00 mensais</strong>, garantindo o alinhamento com a média inicial de mercado e
+              viabilidade operacional do projeto.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="aviso">
+        <svg class="ic"><use href="#i-predio"/></svg>
+        <div>
+          <span class="status" style="margin-top:0">STATUS: EM FASE DE DESENVOLVIMENTO — ESCOPO</span>
+          <p style="margin-top:6px"><a href="https://canva.link/13i7yhxjbybjcjy" target="_blank" rel="noopener">
+            Visualizar a proposta de organograma <svg class="ic" style="width:12px;height:12px"><use href="#i-link"/></svg></a></p>
+        </div>
+      </div>
+
+      <div class="aviso">
+        <svg class="ic"><use href="#i-usuarios"/></svg>
+        <div>
+          <span class="status" style="margin-top:0">AÇÃO: CRIAR OS CARGOS E FAZER A DESCRIÇÃO — AGUARDAR O ORGANOGRAMA</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINANCEIRO ================= -->
+  <section id="financeiro" class="escuro">
+    <div class="wrap reveal">
+      <span class="kicker">Viabilidade Financeira</span>
+      <h2>Orçamento Global Estimado</h2>
+      <p class="lead">Previsão e demonstração de custos, despesas e receitas estimadas para 2027.</p>
+
       <div class="fin-grid">
-        <div class="fin-custos">
+        <div class="fin-bloco">
           <div class="fin-cabecalho">
             <h3>Previsão de Custos / Despesas</h3>
             <b>Total: R$ 35.800,00</b>
@@ -1021,7 +780,7 @@
           </div>
         </div>
 
-        <div class="fin-receita">
+        <div class="fin-bloco">
           <div class="fin-cabecalho">
             <h3>Previsão de Receita (2027)</h3>
             <b>Total Estimado: R$ 90.000,00+</b>
@@ -1068,61 +827,68 @@
         </div>
         <span class="valor">+ R$ 54.200,00</span>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ================= GUIAS DO AUTOR ================= -->
-    <section id="guias" class="guias" aria-label="Guias do Autor">
-      <article class="guia">
-        <div class="icone"><svg class="ic"><use href="#i-premio"/></svg></div>
-        <h4>Direitos Autorais</h4>
-        <span class="sub">Biblioteca Nacional</span>
-        <p>Garante o reconhecimento legal da autoria. Recomenda-se registrar antes de enviar a qualquer editora ou
-          agente literário.</p>
-        <span class="passos">Passo a passo comum:</span>
-        <ol>
-          <li>Acesse o site da Biblioteca Nacional (BN)</li>
-          <li>Preencha o formulário de obra intelectual</li>
-          <li>Pague a taxa (R$ 20 a R$ 40)</li>
-          <li>Envie formulário e cópia física ou digital</li>
-        </ol>
-        <p class="citacao">"Caso você perceba parte do seu enredo em outro livro, conseguirá facilmente comprovar a
-          autoria original."</p>
-      </article>
+  <!-- ================= GUIAS DO AUTOR ================= -->
+  <section id="guias" class="claro-2">
+    <div class="wrap reveal">
+      <span class="kicker">Guias do Autor</span>
+      <h2>Como proteger e publicar sua obra</h2>
+      <p class="lead">Direitos autorais na Biblioteca Nacional, estrutura de dígitos do ISBN e o fluxo de publicação
+        na Amazon.</p>
+      <div class="guias">
+        <article class="guia">
+          <div class="icone"><svg class="ic"><use href="#i-premio"/></svg></div>
+          <h3>Direitos Autorais</h3>
+          <span class="sub">Biblioteca Nacional</span>
+          <p>Garante o reconhecimento legal da autoria. Recomenda-se registrar antes de enviar a qualquer editora ou
+            agente literário.</p>
+          <span class="passos">Passo a passo comum:</span>
+          <ol>
+            <li>Acesse o site da Biblioteca Nacional (BN)</li>
+            <li>Preencha o formulário de obra intelectual</li>
+            <li>Pague a taxa (R$ 20 a R$ 40)</li>
+            <li>Envie formulário e cópia física ou digital</li>
+          </ol>
+          <p class="citacao">"Caso você perceba parte do seu enredo em outro livro, conseguirá facilmente comprovar a
+            autoria original."</p>
+        </article>
 
-      <article class="guia">
-        <div class="icone"><svg class="ic"><use href="#i-info"/></svg></div>
-        <h4>O que é o ISBN?</h4>
-        <span class="sub">Identificação Padrão</span>
-        <p>Código de identificação composto de 13 dígitos numéricos obrigatórios internacionalmente desde 2007.</p>
-        <span class="passos">Estrutura de dígitos:</span>
-        <div class="isbn"><span>978</span><span>85</span><span>332</span><span>0800</span><span>6</span></div>
-        <p class="isbn-legenda">978 Prefixo Bookland (Livro) · 85 Identificador de País/Idioma · 332 Código de
-          Registro da Editora · 0800 Identificador do Título da Obra · 6 Dígito de Controle Técnico</p>
-        <p class="citacao">Evita qualquer chance de duplicação.</p>
-      </article>
+        <article class="guia">
+          <div class="icone"><svg class="ic"><use href="#i-info"/></svg></div>
+          <h3>O que é o ISBN?</h3>
+          <span class="sub">Identificação Padrão</span>
+          <p>Código de identificação composto de 13 dígitos numéricos obrigatórios internacionalmente desde 2007.</p>
+          <span class="passos">Estrutura de dígitos:</span>
+          <div class="isbn"><span>978</span><span>85</span><span>332</span><span>0800</span><span>6</span></div>
+          <p class="isbn-legenda">978 Prefixo Bookland (Livro) · 85 Identificador de País/Idioma · 332 Código de
+            Registro da Editora · 0800 Identificador do Título da Obra · 6 Dígito de Controle Técnico</p>
+          <p class="citacao">Evita qualquer chance de duplicação.</p>
+        </article>
 
-      <article class="guia">
-        <div class="icone"><svg class="ic"><use href="#i-globe"/></svg></div>
-        <h4>Publicar na Amazon</h4>
-        <span class="sub">Mercado 100% Digital</span>
-        <p>Fluxo processual para lançamento direto no Marketplace da Amazon e plataforma Kindle Direct Publishing
-          (KDP).</p>
-        <span class="passos">Processo técnico KDP:</span>
-        <ol>
-          <li>Crie conta KDP</li>
-          <li>Acesse Biblioteca e crie Novo Ebook</li>
-          <li>Preencha metadados do autor e livro</li>
-          <li>Upload do miolo do manuscrito</li>
-          <li>Upload da imagem de capa (JPG)</li>
-          <li>Insira registro de ISBN 13 dígitos</li>
-          <li>Defina método de royalties e preços</li>
-          <li>Clique em Publicar</li>
-        </ol>
-        <p class="citacao">Foco em Lançamento 100% Digital.</p>
-      </article>
-    </section>
-
-  </main>
+        <article class="guia">
+          <div class="icone"><svg class="ic"><use href="#i-globe"/></svg></div>
+          <h3>Publicar na Amazon</h3>
+          <span class="sub">Mercado 100% Digital</span>
+          <p>Fluxo processual para lançamento direto no Marketplace da Amazon e plataforma Kindle Direct Publishing
+            (KDP).</p>
+          <span class="passos">Processo técnico KDP:</span>
+          <ol>
+            <li>Crie conta KDP</li>
+            <li>Acesse Biblioteca e crie Novo Ebook</li>
+            <li>Preencha metadados do autor e livro</li>
+            <li>Upload do miolo do manuscrito</li>
+            <li>Upload da imagem de capa (JPG)</li>
+            <li>Insira registro de ISBN 13 dígitos</li>
+            <li>Defina método de royalties e preços</li>
+            <li>Clique em Publicar</li>
+          </ol>
+          <p class="citacao">Foco em Lançamento 100% Digital.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
   <!-- Botão flutuante: voltar ao topo -->
   <button id="btn-topo" aria-label="Voltar ao topo" title="Voltar ao topo">
@@ -1141,10 +907,10 @@
       </div>
       <nav class="footer-nav" aria-label="Seções no rodapé">
         <a href="#mercado">Mercado</a>
-        <a href="#simulador">Simulador</a>
+        <a href="#simulador">Orçamentos</a>
         <a href="#coletaneas">Coletâneas</a>
         <a href="#financeiro">Financeiro</a>
-        <a href="imagens.html">Galeria de Imagens</a>
+        <a href="imagens.html">Variantes da Logo</a>
       </nav>
     </div>
     <div class="container footer-base">

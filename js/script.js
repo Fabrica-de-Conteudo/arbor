@@ -1,12 +1,14 @@
-/* Aprimoramento progressivo: a página funciona 100% sem JavaScript.
-   Aqui entram apenas scrollspy, animações de rolagem e microinterações. */
+/* ARBOR EDITORA — interações do layout
+   Aprimoramento progressivo: sem JavaScript a página continua legível
+   (primeiro player visível, ficha padrão preenchida, acordeões nativos). */
 (function () {
   "use strict";
   var d = document;
   d.documentElement.classList.add("js");
   var reduzMov = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var topo = d.getElementById("topo");
-  var progresso = d.getElementById("progresso-leitura");
+
+  /* ---- Barra de progresso, botão topo e scrollspy (1x por quadro) ---- */
+  var progresso = d.getElementById("progresso");
   var btnTopo = d.getElementById("btn-topo");
   var nav = d.getElementById("nav-secoes");
   var links = [].slice.call(nav.querySelectorAll('a[href^="#"]'));
@@ -14,93 +16,87 @@
     return d.getElementById(a.getAttribute("href").slice(1));
   });
   var linkAtivo = null;
-
-  /* ---- Barra de progresso, header compacto, botão topo e scrollspy ---- */
   var agendado = false;
+
   function aoRolar() {
     if (agendado) return;
     agendado = true;
     requestAnimationFrame(function () {
       agendado = false;
       var max = d.documentElement.scrollHeight - innerHeight;
-      progresso.style.transform = "scaleX(" + (max > 0 ? Math.min(scrollY / max, 1) : 0) + ")";
-      topo.classList.toggle("rolou", scrollY > 12);
+      progresso.style.width = (max > 0 ? Math.min(scrollY / max, 1) * 100 : 0) + "%";
       btnTopo.classList.toggle("visivel", scrollY > 480);
       marcarSecaoAtiva();
     });
   }
 
   function marcarSecaoAtiva() {
-    var ref = topo.offsetHeight + 80;
     var atual = null;
     for (var i = 0; i < alvos.length; i++) {
-      if (alvos[i] && alvos[i].getBoundingClientRect().top <= ref) atual = links[i];
+      if (alvos[i] && alvos[i].getBoundingClientRect().top <= 120) atual = links[i];
     }
     if (atual === linkAtivo) return;
     links.forEach(function (a) { a.classList.toggle("ativa", a === atual); });
     linkAtivo = atual;
-    if (atual) {
+    if (atual && nav.scrollWidth > nav.clientWidth + 4) {
       nav.scrollTo({
-        left: atual.offsetLeft - nav.clientWidth / 2 + atual.offsetWidth / 2,
+        left: atual.parentElement.offsetLeft - nav.clientWidth / 2 + atual.offsetWidth / 2,
         behavior: reduzMov ? "auto" : "smooth"
       });
     }
   }
 
-  function medirNav() {
-    nav.classList.toggle("rolavel", nav.scrollWidth > nav.clientWidth + 4);
-  }
-
   addEventListener("scroll", aoRolar, { passive: true });
-  addEventListener("resize", function () { medirNav(); aoRolar(); }, { passive: true });
+  addEventListener("resize", aoRolar, { passive: true });
   btnTopo.addEventListener("click", function () {
     scrollTo({ top: 0, behavior: reduzMov ? "auto" : "smooth" });
   });
-  medirNav();
   aoRolar();
 
-  /* ---- Revelação escalonada dos blocos ao entrar na tela ---- */
-  if (!reduzMov && "IntersectionObserver" in window) {
-    d.querySelectorAll(
-      "main > section:not(#hero):not(#guias):not(.atalhos), main > .duas-colunas > section"
-    ).forEach(function (el) { el.setAttribute("data-rev", ""); });
-    d.querySelectorAll(
-      ".atalhos > .atalho, #guias > .guia, .pills > .pill, .orc-pills > .orc-pill, " +
-      ".col-pills > .col-pill, .checklist > li, .etapas > li"
-    ).forEach(function (el) { el.setAttribute("data-rev", "item"); });
-
+  /* ---- Revelação das seções ao entrar na tela ---- */
+  if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entradas) {
-      var vez = 0;
       entradas.forEach(function (ent) {
         if (!ent.isIntersecting) return;
-        var el = ent.target;
-        io.unobserve(el);
-        var atraso = Math.min(vez++ * 70, 420);
-        el.style.transitionDelay = atraso + "ms";
-        el.classList.add("visivel");
-        /* depois de revelado, devolve o elemento ao estado normal
-           para os hovers voltarem à velocidade original */
-        setTimeout(function () {
-          el.removeAttribute("data-rev");
-          el.classList.remove("visivel");
-          el.style.transitionDelay = "";
-        }, atraso + 850);
+        ent.target.classList.add("vis");
+        io.unobserve(ent.target);
       });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    }, { threshold: 0.1 });
+    d.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+  } else {
+    d.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("vis"); });
+  }
 
-    d.querySelectorAll("[data-rev]").forEach(function (el) { io.observe(el); });
+  /* ---- Hero: frase digitada em loop ---- */
+  var frases = ["pesquisa o mercado.", "planeja com dados.", "publica com excelência."];
+  var typingEl = d.getElementById("typing");
+  if (reduzMov) {
+    typingEl.textContent = frases[0];
+  } else {
+    var fi = 0, ci = 0, apagando = false;
+    (function tick() {
+      var f = frases[fi];
+      typingEl.textContent = f.slice(0, ci);
+      if (!apagando) {
+        ci++;
+        if (ci > f.length) { apagando = true; setTimeout(tick, 1800); return; }
+      } else {
+        ci--;
+        if (ci === 0) { apagando = false; fi = (fi + 1) % frases.length; }
+      }
+      setTimeout(tick, apagando ? 28 : 55);
+    })();
   }
 
   /* ---- Contagem animada de valores monetários ---- */
   function animarValor(el) {
     if (reduzMov) return;
-    var original = el.dataset.original || el.textContent;
-    el.dataset.original = original;
+    var original = el.dataset.alvo || el.textContent;
     var m = original.match(/\d{1,3}(?:\.\d{3})*(?:,\d+)?/);
-    if (!m) return;
+    if (!m) { el.textContent = original; return; }
     var alvoNum = parseFloat(m[0].replace(/\./g, "").replace(",", "."));
     var centavos = m[0].indexOf(",") >= 0;
-    var inicio = performance.now(), dur = 900;
+    var inicio = performance.now(), dur = 800;
     function quadro(t) {
       var p = Math.min((t - inicio) / dur, 1);
       var suave = 1 - Math.pow(1 - p, 3);
@@ -113,7 +109,6 @@
     }
     requestAnimationFrame(quadro);
   }
-
   if ("IntersectionObserver" in window) {
     var ioNum = new IntersectionObserver(function (entradas) {
       entradas.forEach(function (ent) {
@@ -122,136 +117,114 @@
         animarValor(ent.target);
       });
     }, { threshold: 0.6 });
-    d.querySelectorAll(".resultado .valor, .stat .destaque").forEach(function (el) {
+    d.querySelectorAll(".resultado .valor, .auto-painel .total b").forEach(function (el) {
       ioNum.observe(el);
     });
   }
 
-  /* ---- Abas: recentra a pílula escolhida e anima os valores da ficha ---- */
-  function centrarRotulo(input, suave) {
-    var rotulo = d.querySelector('label[for="' + input.id + '"]');
-    if (!rotulo) return;
-    var trilho = rotulo.parentElement;
-    if (trilho.scrollWidth > trilho.clientWidth + 4) {
-      trilho.scrollTo({
-        left: rotulo.offsetLeft - trilho.clientWidth / 2 + rotulo.offsetWidth / 2,
-        behavior: suave && !reduzMov ? "smooth" : "auto"
-      });
-    }
-  }
-  d.querySelectorAll(".abas").forEach(function (abas) {
-    var inputs = [].slice.call(abas.children).filter(function (el) {
-      return el.tagName === "INPUT";
-    });
-    var paineis = abas.querySelector(".paineis");
-    abas.addEventListener("change", function (ev) {
-      centrarRotulo(ev.target, true);
-      var painel = paineis && paineis.children[inputs.indexOf(ev.target)];
-      if (painel) painel.querySelectorAll(".valor").forEach(animarValor);
+  /* ---- Pesquisa de mercado: abas dos players ---- */
+  var modos = [].slice.call(d.querySelectorAll("#mercado .modo"));
+  var paineis = [].slice.call(d.querySelectorAll("#mercado .player-painel"));
+  var playerTag = d.getElementById("player-tag");
+  modos.forEach(function (b, i) {
+    b.addEventListener("click", function () {
+      modos.forEach(function (x) { x.classList.remove("ativo"); x.setAttribute("aria-selected", "false"); });
+      paineis.forEach(function (p) { p.classList.remove("ativo"); });
+      b.classList.add("ativo");
+      b.setAttribute("aria-selected", "true");
+      paineis[i].classList.add("ativo");
+      playerTag.textContent = "Player " + (i + 1) + "/5 · " + b.querySelector("strong").textContent.replace("Editora ", "");
     });
   });
-  d.querySelectorAll(".abas > input:checked").forEach(function (input) {
-    centrarRotulo(input, false);
+
+  /* ---- Coautoria: slider de autoras ---- */
+  var range = d.getElementById("nivel-autoras");
+  if (range) {
+    var VALOR_AUTORA = 3600;
+    range.addEventListener("input", function () {
+      var n = +range.value;
+      d.getElementById("qtd-autoras").textContent = n;
+      d.getElementById("stat-autoras").textContent = n;
+      d.getElementById("lote-total").textContent =
+        "R$ " + (n * VALOR_AUTORA).toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+    });
+  }
+
+  /* ---- Cartas que viram (implementação) ---- */
+  d.querySelectorAll(".carta").forEach(function (c) {
+    c.addEventListener("click", function () { c.classList.toggle("virada"); });
   });
 
-  /* ---- Brilho que acompanha o cursor nos cartões e fundo global ---- */
-  if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
-    var bgCanvas = d.getElementById("bg-canvas");
-    d.addEventListener("pointermove", function (ev) {
-      if (bgCanvas && !reduzMov) {
-        bgCanvas.style.setProperty("--mx", ev.clientX + "px");
-        bgCanvas.style.setProperty("--my", ev.clientY + "px");
-      }
-      var carta = ev.target.closest && ev.target.closest(".atalho, .pill, .orc-pill, .guia, .painel, .box");
-      if (!carta) return;
-      var r = carta.getBoundingClientRect();
-      carta.style.setProperty("--mx", (ev.clientX - r.left) + "px");
-      carta.style.setProperty("--my", (ev.clientY - r.top) + "px");
-    }, { passive: true });
-  }
+  /* ---- Simulador de orçamentos: 10 propostas reais (lote 145012) ---- */
+  var CAPA_DC = "31x21cm, 4x0 cores em Couche Fosco FSC 300g. Arte Fornecida pelo Cliente. Prova Digital Konica Minolta.";
+  var CAPA_CD_CTP = "Revest. Capa: 25x35cm, 4x1 cores, Tinta Escala em Couche Fosco FSC LD 170g. Arte Fornecida pelo Cliente. CTP Incluso. Prova Digital Konica Minolta.";
+  var CAPA_CD = "Revest. Capa: 25x35cm, 4x1 cores em Couche Fosco FSC LD 170g. Arte Fornecida pelo Cliente. Prova Digital Konica Minolta.";
+  function mioloSimples(p) { return p + " pgs, 15x21cm, 1 cor em Off Set Alto Alvura Suzano 75g. Prova Digital Konica Minolta."; }
+  function mioloCTP(p) { return p + " pgs, 15x21cm, 1 cor, Preto em Off Set Alto Alvura Suzano 75g. CTP Incluso. Prova Digital Konica Minolta."; }
+  function lombDC(mm) { return mm + "mm, Laminado Fosco, Nº lados 1(Capa), Vinco(Capa), Intercalação(Miolo), Colagem PUR, FRETE, FOB (Destinatário)."; }
+  function lombDCAuto(mm) { return mm + "mm, Laminado Fosco, Nº lados 1(Capa), Vinco(Capa), Dobradeira Automática, Intercalação, Colagem Dorso Hot Melt, Colagem PUR, FRETE, FOB (Destinatário)."; }
+  function lombCD(mm, acab) { return mm + "mm, " + acab + ", Nº lados 1(Revest. Capa), Capa Dura(Revest. Capa), Dobradeira Automática(Papelão), Intercalação(Papelão), Colagem PUR, FRETE, FOB (Destinatário)."; }
 
-  /* ---- Variável global de scroll para efeitos Parallax ---- */
-  if (!reduzMov) {
-    window.addEventListener("scroll", function() {
-      d.documentElement.style.setProperty("--scrollY", window.scrollY + "px");
-    }, { passive: true });
-    d.documentElement.style.setProperty("--scrollY", window.scrollY + "px");
-  }
+  var ORCAMENTOS = {
+    "dorso-10-100":  { n: "145012.01", unit: "R$ 100,00", total: "R$ 1.000,00", capa: CAPA_DC, miolo: mioloSimples(100), lomb: lombDC(4) },
+    "dorso-10-200":  { n: "145012.02", unit: "R$ 140,00", total: "R$ 1.400,00", capa: CAPA_DC, miolo: mioloSimples(200), lomb: lombDC(8) },
+    "dorso-50-100":  { n: "145012.03", unit: "R$ 51,40",  total: "R$ 2.570,00", capa: CAPA_DC, miolo: mioloCTP(100), lomb: lombDCAuto(4) },
+    "dorso-50-200":  { n: "145012.04", unit: "R$ 69,00",  total: "R$ 3.450,00", capa: CAPA_DC, miolo: mioloCTP(200), lomb: lombDCAuto(8) },
+    "dorso-100-100": { n: "145012.05", unit: "R$ 30,95",  total: "R$ 3.095,00", capa: CAPA_DC, miolo: mioloCTP(100), lomb: lombDCAuto(4) },
+    "dorso-100-200": { n: "145012.06", unit: "R$ 44,00",  total: "R$ 4.400,00", capa: CAPA_DC, miolo: mioloCTP(200), lomb: lombDCAuto(8) },
+    "dura-200-100":  { n: "145012.07", unit: "R$ 30,85",  total: "R$ 6.170,00", capa: CAPA_CD_CTP, miolo: mioloCTP(100), lomb: lombCD(6, "Laminação Alto Brilho") },
+    "dura-100-100":  { n: "145012.08", unit: "R$ 42,70",  total: "R$ 4.270,00", capa: CAPA_CD_CTP, miolo: mioloCTP(100), lomb: lombCD(6, "Laminado Fosco") },
+    "dura-50-100":   { n: "145012.09", unit: "R$ 64,00",  total: "R$ 3.200,00", capa: CAPA_CD, miolo: mioloCTP(100), lomb: lombCD(6, "Laminação Alto Brilho") },
+    "dura-50-200":   { n: "145012.10", unit: "R$ 89,00",  total: "R$ 4.450,00", capa: CAPA_CD, miolo: mioloCTP(200), lomb: lombCD(9, "Laminação Alto Brilho") }
+  };
 
-  /* ---- Sistema de Partículas Reativas ---- */
-  if (!reduzMov) {
-    var canvas = d.getElementById("particulas");
-    if (canvas) {
-      var ctx = canvas.getContext("2d");
-      var particulas = [];
-      var numParticulas = 60;
-      var cw = window.innerWidth;
-      var ch = window.innerHeight;
-      var mx = cw/2, my = ch/2;
-      
-      canvas.width = cw;
-      canvas.height = ch;
+  var escAcab = d.getElementById("esc-acab");
+  if (escAcab) {
+    var escUn = d.getElementById("esc-un");
+    var escPg = d.getElementById("esc-pg");
+    var sel = { acab: "dorso", un: "50", pg: "100" };
 
-      window.addEventListener("resize", function() {
-        cw = window.innerWidth;
-        ch = window.innerHeight;
-        canvas.width = cw;
-        canvas.height = ch;
-      });
-
-      d.addEventListener("pointermove", function(e) {
-        mx = e.clientX;
-        my = e.clientY;
-      }, { passive: true });
-
-      for (var i = 0; i < numParticulas; i++) {
-        particulas.push({
-          x: Math.random() * cw,
-          y: Math.random() * ch * 2, // Maior área para permitir scroll sem ficar vazio
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
-          r: Math.random() * 2 + 1,
-          cor: Math.random() > 0.5 ? "rgba(130, 10, 209, 0.25)" : "rgba(0, 190, 152, 0.3)"
-        });
-      }
-
-      function animarParticulas() {
-        ctx.clearRect(0, 0, cw, ch);
-        var scrollY = window.scrollY;
-        var parallaxFactor = 0.3;
-        
-        for (var i = 0; i < numParticulas; i++) {
-          var p = particulas[i];
-          p.x += p.vx;
-          p.y += p.vy;
-
-          var renderY = p.y - (scrollY * parallaxFactor);
-          
-          // Recicla partículas fora da tela
-          if (p.x < -10) p.x = cw + 10;
-          if (p.x > cw + 10) p.x = -10;
-          if (renderY < -10) p.y += ch + 20;
-          if (renderY > ch + 10) p.y -= ch + 20;
-
-          // Reação suave ao mouse (repulsão)
-          var renderYAtual = p.y - (scrollY * parallaxFactor);
-          var dx = mx - p.x;
-          var dy = my - renderYAtual;
-          var dist = Math.sqrt(dx*dx + dy*dy);
-          if (dist < 120) {
-            var force = (120 - dist) / 120;
-            p.x -= (dx / dist) * force * 2.5;
-            p.y -= (dy / dist) * force * 2.5;
-          }
-
-          ctx.fillStyle = p.cor;
-          ctx.beginPath();
-          ctx.arc(p.x, renderYAtual, p.r, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        requestAnimationFrame(animarParticulas);
-      }
-      requestAnimationFrame(animarParticulas);
+    function opcoes(grupo) { return [].slice.call(grupo.querySelectorAll("button")); }
+    function existe(acab, un, pg) { return !!ORCAMENTOS[acab + "-" + un + "-" + pg]; }
+    function temAlguma(acab, un) {
+      return ["100", "200"].some(function (pg) { return existe(acab, un, pg); });
     }
+
+    function atualizarDisponibilidade() {
+      opcoes(escUn).forEach(function (b) { b.disabled = !temAlguma(sel.acab, b.dataset.v); });
+      if (!temAlguma(sel.acab, sel.un)) {
+        sel.un = opcoes(escUn).filter(function (b) { return !b.disabled; })[0].dataset.v;
+      }
+      opcoes(escPg).forEach(function (b) { b.disabled = !existe(sel.acab, sel.un, b.dataset.v); });
+      if (!existe(sel.acab, sel.un, sel.pg)) {
+        sel.pg = opcoes(escPg).filter(function (b) { return !b.disabled; })[0].dataset.v;
+      }
+      [[escAcab, "acab"], [escUn, "un"], [escPg, "pg"]].forEach(function (par) {
+        opcoes(par[0]).forEach(function (b) { b.classList.toggle("ativo", b.dataset.v === sel[par[1]]); });
+      });
+    }
+
+    function renderFicha() {
+      var o = ORCAMENTOS[sel.acab + "-" + sel.un + "-" + sel.pg];
+      d.getElementById("orc-proposta").textContent = "Proposta Nº " + o.n;
+      d.getElementById("orc-capa").textContent = o.capa;
+      d.getElementById("orc-miolo").textContent = o.miolo;
+      d.getElementById("orc-lombada").textContent = o.lomb;
+      var unit = d.getElementById("orc-unit"), total = d.getElementById("orc-total");
+      unit.dataset.alvo = o.unit; unit.textContent = o.unit;
+      total.dataset.alvo = o.total; total.textContent = o.total;
+      animarValor(unit); animarValor(total);
+    }
+
+    [[escAcab, "acab"], [escUn, "un"], [escPg, "pg"]].forEach(function (par) {
+      par[0].addEventListener("click", function (ev) {
+        var b = ev.target.closest("button");
+        if (!b || b.disabled) return;
+        sel[par[1]] = b.dataset.v;
+        atualizarDisponibilidade();
+        renderFicha();
+      });
+    });
+    atualizarDisponibilidade();
   }
 })();

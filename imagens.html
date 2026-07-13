@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galeria de Imagens — ARBOR EDITORA</title>
-  <meta name="description" content="Acervo de imagens e identidade visual da Arbor Editora: logos, variações e favicon.">
+  <title>Variantes da Logo — ARBOR EDITORA</title>
+  <meta name="description" content="Variantes da logo da Arbor Editora: pranchas com as combinações da marca sobre as cores oficiais.">
   <link rel="icon" type="image/png" href="img/favicon-arbor.png">
   <link rel="stylesheet" href="css/estilo.css">
   <style>
@@ -20,38 +20,27 @@
     }
     .galeria-topo .voltar:hover { color: var(--purple-vivid); }
 
-    .galeria {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 20px;
-      padding: 26px 0 70px;
-    }
-    .obra {
+    /* Pranchas de variantes (JPEGs com fundo próprio, exibidas em largura maior) */
+    .pranchas { display: grid; gap: 26px; padding: 26px 0 70px; }
+    .prancha {
+      margin: 0;
       border: 1px solid var(--borda-lavanda, rgba(130, 10, 209, .15));
       border-radius: 20px;
       background: #fff;
       overflow: hidden;
       box-shadow: 0 14px 34px -18px rgba(130, 10, 209, .25);
     }
-    .obra .moldura {
-      display: grid; place-items: center;
-      min-height: 190px;
-      padding: 26px;
-      background:
-        radial-gradient(420px 200px at 80% -20%, rgba(0, 255, 206, .18), transparent 60%),
-        linear-gradient(135deg, #9a18e8 0%, #820ad1 45%, #52077f 100%);
-    }
-    .obra .moldura img { max-width: 100%; max-height: 150px; height: auto; filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .25)); }
-    .obra .info { padding: 16px 18px 18px; }
-    .obra .info b { display: block; font-size: 15px; }
-    .obra .info code {
+    .prancha img { display: block; width: 100%; height: auto; }
+    .prancha figcaption { padding: 16px 18px 18px; }
+    .prancha figcaption b { display: block; font-size: 15px; }
+    .prancha figcaption code {
       display: inline-block; margin: 6px 0 8px;
       font: 500 12px/1 var(--font-mono, monospace);
       color: var(--purple-deep);
       background: rgba(130, 10, 209, .07);
       padding: 4px 8px; border-radius: 6px;
     }
-    .obra .info p { font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+    .prancha figcaption p { font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
   </style>
 </head>
 
@@ -60,56 +49,39 @@
     <header class="galeria-topo">
       <a class="voltar" href="index.html">← Voltar para a página principal</a>
       <span class="kicker">Identidade Visual</span>
-      <h2>Galeria de Imagens</h2>
-      <p>Acervo de imagens do projeto Arbor Editora. As logos são brancas com fundo transparente,
-        por isso são exibidas sobre o roxo oficial da marca.</p>
+      <h2>Variantes da Logo</h2>
+      <p>Variantes da logo da Arbor Editora — pranchas com as combinações da marca
+        sobre as cores oficiais.</p>
     </header>
 
-    <section class="galeria" aria-label="Imagens do projeto">
-      <article class="obra">
-        <div class="moldura"><img src="img/logo-editora-13.png" alt="Logo horizontal da Arbor Editora"></div>
-        <div class="info">
-          <b>Logo principal (horizontal)</b>
-          <code>img/logo-editora-13.png</code>
-          <p>Usada no hero da página principal.</p>
-        </div>
-      </article>
+    <section class="pranchas" aria-label="Pranchas de variantes da logo">
+      <figure class="prancha">
+        <img src="img/variante1.jpeg" alt="Prancha da logo principal sobre roxo escuro #820ad1 e verde" loading="lazy">
+        <figcaption>
+          <b>Logo principal — Roxo escuro</b>
+          <code>img/variante1.jpeg</code>
+          <p>Símbolo do livro em seis combinações sobre roxo #820ad1 e verde da marca.</p>
+        </figcaption>
+      </figure>
 
-      <article class="obra">
-        <div class="moldura"><img src="img/logo-arbor.png" alt="Símbolo da Arbor Editora"></div>
-        <div class="info">
-          <b>Símbolo Arbor</b>
-          <code>img/logo-arbor.png</code>
-          <p>Usada no rodapé e como marca-d'água do hero.</p>
-        </div>
-      </article>
+      <figure class="prancha">
+        <img src="img/variante2.jpeg" alt="Prancha da variação da logo sobre roxo claro #8525d8 e verde" loading="lazy">
+        <figcaption>
+          <b>Variação — Roxo claro</b>
+          <code>img/variante2.jpeg</code>
+          <p>Símbolo do livro aberto em seis combinações sobre roxo claro #8525d8 e verde.</p>
+        </figcaption>
+      </figure>
 
-      <article class="obra">
-        <div class="moldura"><img src="img/favicon-arbor.png" alt="Favicon da Arbor Editora"></div>
-        <div class="info">
-          <b>Favicon</b>
-          <code>img/favicon-arbor.png</code>
-          <p>Ícone exibido na aba do navegador.</p>
-        </div>
-      </article>
+      <figure class="prancha">
+        <img src="img/variante3.jpeg" alt="Prancha da variação da logo sobre fundos em degradê" loading="lazy">
+        <figcaption>
+          <b>Variação — Degradê</b>
+          <code>img/variante3.jpeg</code>
+          <p>Mesmas combinações aplicadas sobre fundos em degradê roxo/verde.</p>
+        </figcaption>
+      </figure>
 
-      <article class="obra">
-        <div class="moldura"><img src="img/logo-editora-a.png" alt="Variação A da logo da Arbor Editora"></div>
-        <div class="info">
-          <b>Variação — Logo A</b>
-          <code>img/logo-editora-a.png</code>
-          <p>Variação da identidade visual (reserva, não utilizada na página).</p>
-        </div>
-      </article>
-
-      <article class="obra">
-        <div class="moldura"><img src="img/logo-editora-14.png" alt="Variação 14 da logo da Arbor Editora"></div>
-        <div class="info">
-          <b>Variação — Logo 14</b>
-          <code>img/logo-editora-14.png</code>
-          <p>Variação da identidade visual (reserva, não utilizada na página).</p>
-        </div>
-      </article>
     </section>
   </main>
 </body>
