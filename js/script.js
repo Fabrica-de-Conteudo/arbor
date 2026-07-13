@@ -227,4 +227,108 @@
     });
     atualizarDisponibilidade();
   }
+
+  /* ---- Modal de Pesquisa de Salários ---- */
+  var btnAbrirModal = d.getElementById("btn-abrir-pesquisa");
+  var btnFecharModal = d.getElementById("btn-fechar-modal");
+  var modalPesquisa = d.getElementById("modal-pesquisa");
+
+  if (btnAbrirModal && btnFecharModal && modalPesquisa) {
+    var abrirModal = function () {
+      modalPesquisa.classList.add("ativo");
+      modalPesquisa.setAttribute("aria-hidden", "false");
+      d.body.classList.add("modal-aberto");
+      btnFecharModal.focus();
+    };
+
+    var fecharModal = function () {
+      modalPesquisa.classList.remove("ativo");
+      modalPesquisa.setAttribute("aria-hidden", "true");
+      d.body.classList.remove("modal-aberto");
+      btnAbrirModal.focus();
+    };
+
+    btnAbrirModal.addEventListener("click", abrirModal);
+    btnFecharModal.addEventListener("click", fecharModal);
+
+    modalPesquisa.addEventListener("click", function (ev) {
+      if (ev.target === modalPesquisa) {
+        fecharModal();
+      }
+    });
+
+    addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape" && modalPesquisa.classList.contains("ativo")) {
+        fecharModal();
+      }
+    });
+  }
+
+  /* ---- Efeito de Partículas no Hero ---- */
+  var canvas = d.getElementById("hero-particles");
+  if (canvas) {
+    var ctx = canvas.getContext("2d");
+    var particulas = [];
+    var qtd = 60;
+    
+    var ajustarTamanho = function () {
+      canvas.width = canvas.parentElement.offsetWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
+    };
+    ajustarTamanho();
+    addEventListener("resize", ajustarTamanho);
+
+    var Cores = ["rgba(130, 10, 209, 0.45)", "rgba(0, 255, 206, 0.4)", "rgba(154, 24, 232, 0.3)"];
+
+    for (var i = 0; i < qtd; i++) {
+      particulas.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 3 + 1,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        cor: Cores[Math.floor(Math.random() * Cores.length)]
+      });
+    }
+
+    var animar = function () {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      for (var i = 0; i < qtd; i++) {
+        var p = particulas[i];
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.cor;
+        ctx.fill();
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        for (var j = i + 1; j < qtd; j++) {
+          var p2 = particulas[j];
+          var dx = p.x - p2.x;
+          var dy = p.y - p2.y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = "rgba(205, 189, 228, " + (1 - dist / 100) * 0.12 + ")";
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animar);
+    };
+
+    if (!reduzMov) {
+      animar();
+    }
+  }
 })();

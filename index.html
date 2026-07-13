@@ -66,6 +66,7 @@
 
   <!-- ================= HERO ================= -->
   <header class="hero" id="topo">
+    <canvas id="hero-particles" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; opacity: 0.6;"></canvas>
     <div class="selo">Modelo Editorial · 2026 · Arbor Editora ·&nbsp;</div>
     <div class="wrap">
       <img src="img/logo-editora-13.png" alt="ARBOR — Ideias que crescem, conhecimento que transforma" class="hero-main-logo">
@@ -598,137 +599,28 @@
           <span class="status">NOTA TÉCNICA: CARGO DE EDITORA — VALOR: R$ 3.600,00</span>
         </div>
       </div>
-
-      <div style="margin-top:1rem">
-        <details class="acordeao">
-          <summary>Visualizar Pesquisa de Salários<span class="resumo">Editor de Livros — remunerações, cargos e referências nacionais · UNICIVE · Maringá, PR · 2026</span></summary>
-          <div class="corpo relatorio-corpo">
-            <header>
-              <h4>Pesquisa de Mercado — Editor de Livros</h4>
-              <p>Análise de remunerações, cargos e referências nacionais para a operação editorial.<br>
-                UNICIVE — Centro Universitário Cidade Verde · Maringá, PR · 2026</p>
-            </header>
-
-            <div>
-              <h5>1. Visão Geral: Pesquisa de Mercado Vagas</h5>
-              <p class="explica">Levantamento amostral de vagas ativas no mercado nacional para profissionais
-                da área editorial em canais de recrutamento online. Todas as vagas: modalidade híbrida,
-                plataforma beBee.</p>
-              <ul class="lista-vagas">
-                <li>
-                  <div class="vaga-info"><b>Editor / Gestor de Produção Editorial</b><span>Microkids Tecnologia Educacional</span></div>
-                  <span class="salario">R$ 13.000,00</span>
-                </li>
-                <li>
-                  <div class="vaga-info"><b>Pessoa Editora Assistente Pleno Matemática — PNLD</b><span>FTD Educação</span></div>
-                  <span class="salario">R$ 1.000 – R$ 12.000</span>
-                </li>
-                <li>
-                  <div class="vaga-info"><b>Pessoa Editora de Conteúdo Digital Jr. | Ciências da Natureza</b><span>FTD Educação</span></div>
-                  <span class="salario">R$ 2.900 – R$ 4.000</span>
-                </li>
-                <li>
-                  <div class="vaga-info"><b>Pessoa Editora de Avaliações — Ciências da Natureza</b><span>Arco Educação</span></div>
-                  <span class="salario">R$ 4.600 – R$ 7.000</span>
-                </li>
-                <li>
-                  <div class="vaga-info"><b>Pessoa Editora de Avaliações — Linguagens</b><span>Arco Educação</span></div>
-                  <span class="salario">R$ 4.600 – R$ 7.000</span>
-                </li>
-                <li>
-                  <div class="vaga-info"><b>Pessoa Editora Assistente Pleno I Avaliação</b><span>FTD Educação</span></div>
-                  <span class="salario">R$ 1.000 – R$ 12.000</span>
-                </li>
-                <li>
-                  <div class="vaga-info"><b>Pessoa Editora Assistente Pleno | São Paulo</b><span>FTD Educação</span></div>
-                  <span class="salario">R$ 2.100 – R$ 27.000</span>
-                </li>
-                <li>
-                  <div class="vaga-info"><b>Pessoa Editora Assistente PL — História</b><span>FTD Educação</span></div>
-                  <span class="salario">R$ 8.750 – R$ 39.500</span>
-                </li>
-                <li>
-                  <div class="vaga-info"><b>Pessoa Editora Assistente JR — PNLD — Matemática</b><span>FTD Educação</span></div>
-                  <span class="salario">R$ 1.250 – R$ 1.600</span>
-                </li>
-                <li>
-                  <div class="vaga-info"><b>Pessoa Editora SR — História | PNLD</b><span>Netvagas</span></div>
-                  <span class="salario">R$ 6.000 – R$ 9.000</span>
-                </li>
-                <li>
-                  <div class="vaga-info"><b>Pessoa Editora de Conteúdo Bilíngue</b><span>Arco Educação</span></div>
-                  <span class="salario">R$ 1.500 – R$ 3.000</span>
-                </li>
-                <li>
-                  <div class="vaga-info"><b>Pessoa Editora Assistente Pleno I Idiomas</b><span>FTD Educação</span></div>
-                  <span class="salario">R$ 1.000 – R$ 12.000</span>
-                </li>
-              </ul>
-              <p class="fonte">Quadro 1</p>
-            </div>
-
-            <div>
-              <h5>2. Referência salarial nacional (CBO 2616-10 — Editor de Livro)</h5>
-              <p class="explica">Referência consolidada para a
-                ocupação de Editor de Livro com dados regulamentados e contratações oficiais vigentes no
-                território nacional.</p>
-              <div class="tabela-scroll estreita">
-                <table>
-                  <thead><tr><th>Indicador</th><th>Valor de Referência</th></tr></thead>
-                  <tbody>
-                    <tr><td>Média salarial</td><td>R$ 6.563 / mês</td></tr>
-                    <tr><td>Mediana</td><td>R$ 5.949 / mês</td></tr>
-                    <tr><td>Piso (acordos coletivos)</td><td>R$ 9.111 / mês</td></tr>
-                    <tr><td>Teto salarial</td><td>R$ 11.632 / mês</td></tr>
-                    <tr><td>Jornada média</td><td>42h / semana</td></tr>
-                    <tr><td>Regime contratual</td><td>CLT (Consolidação das Leis do Trabalho)</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class="fonte">Quadro 2</p>
-            </div>
-
-            <div>
-              <h5>3. Referências salariais consolidadas</h5>
-              <p class="explica">Comparativo direto por cargo
-                editorial e fonte de apuração de mercado, considerando contratações em regime CLT na região de
-                São Paulo e nível nacional.</p>
-              <ul class="lista-vagas">
-                <li>
-                  <div class="vaga-info"><b>Editor de Livro (CBO 2616-10)</b><span>Portal Salário / CAGED · 42h/sem</span></div>
-                  <span class="salario">R$ 6.645 média · R$ 9.167 piso</span>
-                </li>
-                <li>
-                  <div class="vaga-info"><b>Editor Assistente (SP)</b><span>Portal Salário / CAGED · 44h/sem</span></div>
-                  <span class="salario">R$ 4.275 – R$ 12.364</span>
-                </li>
-                <li>
-                  <div class="vaga-info"><b>Assistente Editorial (SP)</b><span>Portal Salário / CAGED · 38h/sem</span></div>
-                  <span class="salario">R$ 4.782 mediana · R$ 5.996 piso</span>
-                </li>
-                <li>
-                  <div class="vaga-info"><b>Editor (geral)</b><span>Glassdoor · 1.221 relatos</span></div>
-                  <span class="salario">R$ 3.000 – R$ 7.000</span>
-                </li>
-              </ul>
-              <p class="fonte">Quadro 3</p>
-            </div>
-
-            <p class="conclusao">Os dados demonstram que as remunerações praticadas no mercado editorial oscilam
-              de R$ 3.000,00 a R$ 13.000,00. Com base no diagnóstico local e na política de enquadramento da
-              instituição, define-se para o cargo de Editora na Arbor Editora o valor de
-              <strong>R$ 3.600,00 mensais</strong>, garantindo o alinhamento com a média inicial de mercado e
-              viabilidade operacional do projeto.</p>
+      <div class="aviso" style="align-items: center;">
+        <svg class="ic"><use href="#i-usuarios"/></svg>
+        <div>
+          <span class="status" style="margin-top:0">PESQUISA COMPLETA — REF. NACIONAL</span>
+          <p style="margin-top:4px; font-size:0.9rem; color:var(--ink-2);">Editor de Livros — remunerações, cargos e referências nacionais · UNICIVE · Maringá, PR · 2026</p>
+          <div style="margin-top:8px">
+            <button id="btn-abrir-pesquisa" class="btn btn-verde" style="font-size:14px; padding: 0.5rem 1.2rem;">
+              Visualizar Pesquisa de Salários <svg class="ic" style="width:12px;height:12px;margin-left:4px"><use href="#i-link"/></svg>
+            </button>
           </div>
-        </details>
+        </div>
       </div>
 
-      <div class="aviso">
+      <div class="aviso" style="align-items: center;">
         <svg class="ic"><use href="#i-predio"/></svg>
         <div>
           <span class="status" style="margin-top:0">STATUS: EM FASE DE DESENVOLVIMENTO — ESCOPO</span>
-          <p style="margin-top:6px"><a href="https://canva.link/13i7yhxjbybjcjy" target="_blank" rel="noopener">
-            Visualizar a proposta de organograma <svg class="ic" style="width:12px;height:12px"><use href="#i-link"/></svg></a></p>
+          <div style="margin-top:8px">
+            <a class="btn btn-roxo" href="https://canva.link/13i7yhxjbybjcjy" target="_blank" rel="noopener">
+              Visualizar a proposta de organograma <svg class="ic" style="width:12px;height:12px"><use href="#i-link"/></svg>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -918,6 +810,139 @@
       <span class="frase">Ideias que crescem</span>
     </div>
   </footer>
+
+  <!-- Modal de Pesquisa de Salários -->
+  <div id="modal-pesquisa" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-titulo">
+    <div class="modal-container">
+      <header class="modal-header">
+        <h3 id="modal-titulo">Pesquisa de Cargos e Salários</h3>
+        <button class="btn-fechar" id="btn-fechar-modal" aria-label="Fechar modal">
+          <svg class="ic" style="width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </header>
+      <div class="modal-body relatorio-corpo">
+        <header>
+          <h4>Pesquisa de Mercado — Editor de Livros</h4>
+          <p style="color: var(--ink-3); font-size: 0.82rem; margin-top: 4px;">Análise de remunerações, cargos e referências nacionais para a operação editorial.<br>
+            UNICIVE — Centro Universitário Cidade Verde · Maringá, PR · 2026</p>
+        </header>
+
+        <div>
+          <h5>1. Visão Geral: Pesquisa de Mercado Vagas</h5>
+          <p class="explica">Levantamento amostral de vagas ativas no mercado nacional para profissionais
+            da área editorial em canais de recrutamento online. Todas as vagas: modalidade híbrida,
+            plataforma beBee.</p>
+          <ul class="lista-vagas">
+            <li>
+              <div class="vaga-info"><b>Editor / Gestor de Produção Editorial</b><span>Microkids Tecnologia Educacional</span></div>
+              <span class="salario">R$ 13.000,00</span>
+            </li>
+            <li>
+              <div class="vaga-info"><b>Pessoa Editora Assistente Pleno Matemática — PNLD</b><span>FTD Educação</span></div>
+              <span class="salario">R$ 1.000 – R$ 12.000</span>
+            </li>
+            <li>
+              <div class="vaga-info"><b>Pessoa Editora de Conteúdo Digital Jr. | Ciências da Natureza</b><span>FTD Educação</span></div>
+              <span class="salario">R$ 2.900 – R$ 4.000</span>
+            </li>
+            <li>
+              <div class="vaga-info"><b>Pessoa Editora de Avaliações — Ciências da Natureza</b><span>Arco Educação</span></div>
+              <span class="salario">R$ 4.600 – R$ 7.000</span>
+            </li>
+            <li>
+              <div class="vaga-info"><b>Pessoa Editora de Avaliações — Linguagens</b><span>Arco Educação</span></div>
+              <span class="salario">R$ 4.600 – R$ 7.000</span>
+            </li>
+            <li>
+              <div class="vaga-info"><b>Pessoa Editora Assistente Pleno I Avaliação</b><span>FTD Educação</span></div>
+              <span class="salario">R$ 1.000 – R$ 12.000</span>
+            </li>
+            <li>
+              <div class="vaga-info"><b>Pessoa Editora Assistente Pleno | São Paulo</b><span>FTD Educação</span></div>
+              <span class="salario">R$ 2.100 – R$ 27.000</span>
+            </li>
+            <li>
+              <div class="vaga-info"><b>Pessoa Editora Assistente PL — História</b><span>FTD Educação</span></div>
+              <span class="salario">R$ 8.750 – R$ 39.500</span>
+            </li>
+            <li>
+              <div class="vaga-info"><b>Pessoa Editora Assistente JR — PNLD — Matemática</b><span>FTD Educação</span></div>
+              <span class="salario">R$ 1.250 – R$ 1.600</span>
+            </li>
+            <li>
+              <div class="vaga-info"><b>Pessoa Editora SR — História | PNLD</b><span>Netvagas</span></div>
+              <span class="salario">R$ 6.000 – R$ 9.000</span>
+            </li>
+            <li>
+              <div class="vaga-info"><b>Pessoa Editora de Conteúdo Bilíngue</b><span>Arco Educação</span></div>
+              <span class="salario">R$ 1.500 – R$ 3.000</span>
+            </li>
+            <li>
+              <div class="vaga-info"><b>Pessoa Editora Assistente Pleno I Idiomas</b><span>FTD Educação</span></div>
+              <span class="salario">R$ 1.000 – R$ 12.000</span>
+            </li>
+          </ul>
+          <p class="fonte">Quadro 1</p>
+        </div>
+
+        <div>
+          <h5>2. Referência salarial nacional (CBO 2616-10 — Editor de Livro)</h5>
+          <p class="explica">Referência consolidada para a
+            ocupação de Editor de Livro com dados regulamentados e contratações oficiais vigentes no
+            território nacional.</p>
+          <div class="tabela-scroll estreita">
+            <table>
+              <thead><tr><th>Indicador</th><th>Valor de Referência</th></tr></thead>
+              <tbody>
+                <tr><td>Média salarial</td><td>R$ 6.563 / mês</td></tr>
+                <tr><td>Mediana</td><td>R$ 5.949 / mês</td></tr>
+                <tr><td>Piso (acordos coletivos)</td><td>R$ 9.111 / mês</td></tr>
+                <tr><td>Teto salarial</td><td>R$ 11.632 / mês</td></tr>
+                <tr><td>Jornada média</td><td>42h / semana</td></tr>
+                <tr><td>Regime contratual</td><td>CLT (Consolidação das Leis do Trabalho)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="fonte">Quadro 2</p>
+        </div>
+
+        <div>
+          <h5>3. Referências salariais consolidadas</h5>
+          <p class="explica">Comparativo direto por cargo
+            editorial e fonte de apuração de mercado, considerando contratações em regime CLT na região de
+            São Paulo e nível nacional.</p>
+          <ul class="lista-vagas">
+            <li>
+              <div class="vaga-info"><b>Editor de Livro (CBO 2616-10)</b><span>Portal Salário / CAGED · 42h/sem</span></div>
+              <span class="salario">R$ 6.645 média · R$ 9.167 piso</span>
+            </li>
+            <li>
+              <div class="vaga-info"><b>Editor Assistente (SP)</b><span>Portal Salário / CAGED · 44h/sem</span></div>
+              <span class="salario">R$ 4.275 – R$ 12.364</span>
+            </li>
+            <li>
+              <div class="vaga-info"><b>Assistente Editorial (SP)</b><span>Portal Salário / CAGED · 38h/sem</span></div>
+              <span class="salario">R$ 4.782 mediana · R$ 5.996 piso</span>
+            </li>
+            <li>
+              <div class="vaga-info"><b>Editor (geral)</b><span>Glassdoor · 1.221 relatos</span></div>
+              <span class="salario">R$ 3.000 – R$ 7.000</span>
+            </li>
+          </ul>
+          <p class="fonte">Quadro 3</p>
+        </div>
+
+        <p class="conclusao">Os dados demonstram que as remunerações praticadas no mercado editorial oscilam
+          de R$ 3.000,00 a R$ 13.000,00. Com base no diagnóstico local e na política de enquadramento da
+          instituição, define-se para o cargo de Editora na Arbor Editora o valor de
+          <strong>R$ 3.600,00 mensais</strong>, garantindo o alinhamento com a média inicial de mercado e
+          viabilidade operacional do projeto.</p>
+      </div>
+    </div>
+  </div>
 
   <script src="js/script.js"></script>
 

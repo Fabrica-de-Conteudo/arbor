@@ -649,6 +649,79 @@ footer {
 html.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
 html.js .reveal.vis { opacity: 1; transform: none; }
 
+/* ---------- Modal de Pesquisa de Salários ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 18, 48, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal-overlay.ativo {
+  opacity: 1;
+  pointer-events: all;
+}
+.modal-container {
+  background: #fff;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 85vh;
+  box-shadow: 0 20px 50px rgba(28, 18, 48, 0.15);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(30px) scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid var(--borda-lavanda);
+  overflow: hidden;
+}
+.modal-overlay.ativo .modal-container {
+  transform: translateY(0) scale(1);
+}
+.modal-header {
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid var(--borda-lavanda);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--papel-2);
+}
+.modal-header h3 {
+  font-size: 1.3rem;
+  color: var(--purple-deep);
+  margin: 0;
+}
+.modal-header .btn-fechar {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--ink-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+}
+.modal-header .btn-fechar:hover {
+  background: rgba(130, 10, 209, 0.08);
+  color: var(--purple);
+}
+.modal-body {
+  padding: 2rem;
+  overflow-y: auto;
+}
+body.modal-aberto {
+  overflow: hidden;
+}
+
 /* ---------- Responsivo ---------- */
 @media (max-width: 900px) {
   section { padding: 4rem 0; }
@@ -659,6 +732,16 @@ html.js .reveal.vis { opacity: 1; transform: none; }
   .auto-grid, .formula-grid, .fin-grid { grid-template-columns: 1fr; }
   .saida { position: static; }
   .guias, .produtos-grid { grid-template-columns: 1fr 1fr; }
+  .modal-container {
+    width: 95%;
+    max-height: 90vh;
+  }
+  .modal-header {
+    padding: 1rem 1.5rem;
+  }
+  .modal-body {
+    padding: 1.5rem;
+  }
 }
 @media (max-width: 640px) {
   .wrap, .container { padding-inline: 18px; }
