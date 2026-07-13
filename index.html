@@ -11,6 +11,7 @@
 </head>
 
 <body>
+  <canvas id="global-particles" style="position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 1; pointer-events: none; opacity: 0.20;"></canvas>
   <div id="progresso"></div>
 
   <!-- Ícones reutilizáveis (lucide, licença ISC) -->
@@ -67,8 +68,17 @@
 
   <!-- ================= HERO ================= -->
   <header class="hero" id="topo">
-    <canvas id="hero-particles" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; opacity: 0.6;"></canvas>
-    <div class="selo">Modelo Editorial · 2026 · Arbor Editora ·&nbsp;</div>
+    <div class="selo-container" aria-hidden="true">
+      <div class="selo-texto">
+        <svg viewBox="0 0 100 100" width="100%" height="100%">
+          <path id="curva-selo" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
+          <text font-size="9.5" fill="currentColor" font-weight="600" text-transform="uppercase">
+            <textPath href="#curva-selo" startOffset="0" textLength="250" lengthAdjust="spacing">MODELO EDITORIAL · 2026 · ARBOR EDITORA · </textPath>
+          </text>
+        </svg>
+      </div>
+      <img src="img/logo-arbor.png" alt="" class="selo-logo">
+    </div>
     <div class="wrap">
       <img src="img/logo-editora-13.png" alt="ARBOR — Ideias que crescem, conhecimento que transforma" class="hero-main-logo">
       <p class="frase">Uma editora que <span id="typing"></span><span class="cursor" aria-hidden="true"></span></p>
@@ -468,25 +478,25 @@
       <p class="lead">5 passos fundamentais para viabilidade técnica do e-commerce de e-books. Clique em cada carta
         para revelar.</p>
       <div class="cartas">
-        <button class="carta" aria-label="Passo 1: Viabilidade — clique para revelar"><div class="carta-in">
-          <div class="face frente"><span class="n">01</span><h3>Viabilidade do E-commerce</h3></div>
-          <div class="face tras">Estudar a viabilidade de um e-commerce para comercialização dos livros produzidos pela editora.</div>
-        </div></button>
-        <button class="carta" aria-label="Passo 2: Aditivo de contrato — clique para revelar"><div class="carta-in">
-          <div class="face frente"><span class="n">02</span><h3>Aditivo de Contrato</h3></div>
+        <button class="carta" aria-label="Passo 1: Aditivo de Contrato — clique para revelar"><div class="carta-in">
+          <div class="face frente"><span class="n">01</span><h3>Aditivo de Contrato</h3></div>
           <div class="face tras">Elaborar o aditivo de contrato e sensibilização dos docentes para assinatura. Repasse para o docente pela venda.</div>
         </div></button>
-        <button class="carta" aria-label="Passo 3: Plataformas digitais — clique para revelar"><div class="carta-in">
+        <button class="carta" aria-label="Passo 2: Plataformas de Diagramação — clique para revelar"><div class="carta-in">
+          <div class="face frente"><span class="n">02</span><h3>Plataformas de Diagramação</h3></div>
+          <div class="face tras">Identificar o formato de diagramação dos e-books para a comercialização em plataformas digitais.</div>
+        </div></button>
+        <button class="carta" aria-label="Passo 3: Plataformas Digitais — clique para revelar"><div class="carta-in">
           <div class="face frente"><span class="n">03</span><h3>Plataformas Digitais</h3></div>
           <div class="face tras">Verificar as plataformas que poderíamos utilizar para a venda dos e-books, como Amazon, para assinatura de contratos.</div>
         </div></button>
-        <button class="carta" aria-label="Passo 4: Plataformas de diagramação — clique para revelar"><div class="carta-in">
-          <div class="face frente"><span class="n">04</span><h3>Plataformas de Diagramação</h3></div>
-          <div class="face tras">Identificar o formato de diagramação dos e-books para a comercialização em plataformas digitais.</div>
-        </div></button>
-        <button class="carta" aria-label="Passo 5: Diagramação dos materiais — clique para revelar"><div class="carta-in">
-          <div class="face frente"><span class="n">05</span><h3>Diagramação dos Materiais</h3></div>
+        <button class="carta" aria-label="Passo 4: Diagramação dos Materiais — clique para revelar"><div class="carta-in">
+          <div class="face frente"><span class="n">04</span><h3>Diagramação dos Materiais</h3></div>
           <div class="face tras">Ajustar a diagramação para disponibilização nas plataformas.</div>
+        </div></button>
+        <button class="carta" aria-label="Passo 5: Estudar a Viabilidade de um e-commerce — clique para revelar"><div class="carta-in">
+          <div class="face frente"><span class="n">05</span><h3>Estudar a Viabilidade de um e-commerce</h3></div>
+          <div class="face tras">Para comercialização dos livros produzidos pela editora.</div>
         </div></button>
       </div>
       <p class="dica-flip">Do estudo de viabilidade à publicação: cada etapa destrava a seguinte.</p>
@@ -645,7 +655,6 @@
         <div class="fin-bloco">
           <div class="fin-cabecalho">
             <h3>Previsão de Custos / Despesas</h3>
-            <b>Total: R$ 35.800,00</b>
           </div>
           <div class="tabela-scroll">
             <table>
@@ -671,12 +680,15 @@
               </tbody>
             </table>
           </div>
+          <div class="fin-rodape">
+            <span>Total Estimado</span>
+            <b>R$ 35.800,00</b>
+          </div>
         </div>
 
         <div class="fin-bloco">
           <div class="fin-cabecalho">
             <h3>Previsão de Receita (2027)</h3>
-            <b>Total Estimado: R$ 90.000,00+</b>
           </div>
           <div class="tabela-scroll">
             <table>
@@ -709,6 +721,10 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div class="fin-rodape">
+            <span>Total Estimado</span>
+            <b>R$ 90.000,00+</b>
           </div>
         </div>
       </div>

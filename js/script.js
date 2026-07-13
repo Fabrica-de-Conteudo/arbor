@@ -264,21 +264,31 @@
     });
   }
 
-  /* ---- Efeito de Partículas no Hero ---- */
-  var canvas = d.getElementById("hero-particles");
+  /* ---- Efeito de Partículas Global (Background) ---- */
+  var canvas = d.getElementById("global-particles");
   if (canvas) {
     var ctx = canvas.getContext("2d");
     var particulas = [];
-    var qtd = 60;
+    var qtd = 120;
     
     var ajustarTamanho = function () {
-      canvas.width = canvas.parentElement.offsetWidth;
-      canvas.height = canvas.parentElement.offsetHeight;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
     ajustarTamanho();
     addEventListener("resize", ajustarTamanho);
 
     var Cores = ["rgba(130, 10, 209, 0.45)", "rgba(0, 255, 206, 0.4)", "rgba(154, 24, 232, 0.3)"];
+    
+    var mouse = { x: -1000, y: -1000 };
+    addEventListener("mousemove", function (e) {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    addEventListener("mouseout", function () {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    });
 
     for (var i = 0; i < qtd; i++) {
       particulas.push({
@@ -322,6 +332,23 @@
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
+        }
+        
+        // Interação com o mouse
+        var dxMouse = p.x - mouse.x;
+        var dyMouse = p.y - mouse.y;
+        var distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+        if (distMouse < 150) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = "rgba(130, 10, 209, " + (1 - distMouse / 150) * 0.35 + ")";
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+          
+          // Leve repulsão para as partículas
+          p.x += dxMouse * 0.02;
+          p.y += dyMouse * 0.02;
         }
       }
       requestAnimationFrame(animar);
