@@ -331,4 +331,51 @@
       animar();
     }
   }
+
+  /* ---- Modal Visualizador de Imagens (Lightbox) ---- */
+  var modalImagem = d.getElementById("modal-imagem");
+  var modalImgSrc = d.getElementById("modal-imagem-src");
+  var modalImgTitulo = d.getElementById("modal-imagem-titulo");
+  var btnFecharImg = d.getElementById("btn-fechar-modal-imagem");
+  var cardsVariantes = d.querySelectorAll(".variante-card");
+
+  if (modalImagem && modalImgSrc && modalImgTitulo && btnFecharImg) {
+    var abrirImgModal = function (src, titulo) {
+      modalImgSrc.src = src;
+      modalImgTitulo.textContent = titulo;
+      modalImagem.classList.add("ativo");
+      modalImagem.setAttribute("aria-hidden", "false");
+      d.body.classList.add("modal-aberto");
+      btnFecharImg.focus();
+    };
+
+    var fecharImgModal = function () {
+      modalImagem.classList.remove("ativo");
+      modalImagem.setAttribute("aria-hidden", "true");
+      d.body.classList.remove("modal-aberto");
+      modalImgSrc.src = "";
+    };
+
+    cardsVariantes.forEach(function (card) {
+      card.addEventListener("click", function () {
+        var src = card.getAttribute("data-img");
+        var titulo = card.getAttribute("data-titulo");
+        abrirImgModal(src, titulo);
+      });
+    });
+
+    btnFecharImg.addEventListener("click", fecharImgModal);
+
+    modalImagem.addEventListener("click", function (ev) {
+      if (ev.target === modalImagem) {
+        fecharImgModal();
+      }
+    });
+
+    addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape" && modalImagem.classList.contains("ativo")) {
+        fecharImgModal();
+      }
+    });
+  }
 })();

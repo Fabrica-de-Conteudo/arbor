@@ -722,6 +722,66 @@ body.modal-aberto {
   overflow: hidden;
 }
 
+/* ---------- Variantes da Logo ---------- */
+.variantes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.4rem;
+}
+.variante-card {
+  background: #fff;
+  border: 1px solid var(--borda-lavanda);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(28, 18, 48, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.variante-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(130, 10, 209, 0.12);
+}
+.variante-img {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--purple-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.variante-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.variante-card:hover .variante-img img {
+  transform: scale(1.05);
+}
+.variante-info {
+  padding: 1.3rem;
+}
+.variante-info h3 {
+  font-size: 1.1rem;
+  color: var(--purple-deep);
+  margin-bottom: 6px;
+}
+.variante-info code {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--purple);
+  background: var(--purple-soft);
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+.variante-info p {
+  font-size: 0.85rem;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
 /* ---------- Responsivo ---------- */
 @media (max-width: 900px) {
   section { padding: 4rem 0; }
@@ -732,6 +792,7 @@ body.modal-aberto {
   .auto-grid, .formula-grid, .fin-grid { grid-template-columns: 1fr; }
   .saida { position: static; }
   .guias, .produtos-grid { grid-template-columns: 1fr 1fr; }
+  .variantes-grid { grid-template-columns: 1fr 1fr; }
   .modal-container {
     width: 95%;
     max-height: 90vh;
@@ -748,6 +809,7 @@ body.modal-aberto {
   .cuidados, .servicos-coautoria { grid-template-columns: 1fr; }
   .cartas { grid-template-columns: 1fr 1fr; }
   .guias, .produtos-grid { grid-template-columns: 1fr; }
+  .variantes-grid { grid-template-columns: 1fr; }
   .footer-grid, .footer-base, .footer-nav { justify-content: center; text-align: center; }
   .footer-marca { flex-direction: column; gap: 10px; }
   .footer-base .frase { margin-right: 0; }

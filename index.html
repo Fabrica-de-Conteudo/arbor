@@ -60,6 +60,7 @@
         <li><a href="#salarios">Salários</a></li>
         <li><a href="#financeiro">Financeiro</a></li>
         <li><a href="#guias">Guias</a></li>
+        <li><a href="#variantes">Variantes</a></li>
       </ul>
     </div>
   </nav>
@@ -782,6 +783,47 @@
     </div>
   </section>
 
+  <!-- ================= VARIANTES DA LOGO ================= -->
+  <section id="variantes" class="claro">
+    <div class="wrap reveal">
+      <span class="kicker">Identidade Visual</span>
+      <h2>Variantes da Logo</h2>
+      <p class="lead">Consulte as principais variações de aplicação da marca da Arbor Editora sobre as cores oficiais e degradês.</p>
+
+      <div class="variantes-grid">
+        <article class="variante-card" style="cursor: pointer;" data-img="img/variante1.jpeg" data-titulo="Logo Principal — Roxo Escuro">
+          <div class="variante-img">
+            <img src="img/variante1.jpeg" alt="Logo principal — Roxo escuro" loading="lazy">
+          </div>
+          <div class="variante-info">
+            <h3>Logo Principal — Roxo Escuro</h3>
+            <p>Símbolo do livro em seis combinações sobre o roxo oficial (#820ad1) e o verde da marca.</p>
+          </div>
+        </article>
+
+        <article class="variante-card" style="cursor: pointer;" data-img="img/variante2.jpeg" data-titulo="Variação — Roxo Claro">
+          <div class="variante-img">
+            <img src="img/variante2.jpeg" alt="Variação — Roxo claro" loading="lazy">
+          </div>
+          <div class="variante-info">
+            <h3>Variação — Roxo Claro</h3>
+            <p>Símbolo do livro aberto em seis combinações sobre roxo claro (#8525d8) e o verde.</p>
+          </div>
+        </article>
+
+        <article class="variante-card" style="cursor: pointer;" data-img="img/variante3.jpeg" data-titulo="Variação — Degradê">
+          <div class="variante-img">
+            <img src="img/variante3.jpeg" alt="Variação — Degradê" loading="lazy">
+          </div>
+          <div class="variante-info">
+            <h3>Variação — Degradê</h3>
+            <p>Mesmas combinações aplicadas sobre fundos em degradê suave roxo/verde.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- Botão flutuante: voltar ao topo -->
   <button id="btn-topo" aria-label="Voltar ao topo" title="Voltar ao topo">
     <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
@@ -802,6 +844,7 @@
         <a href="#simulador">Orçamentos</a>
         <a href="#coletaneas">Coletâneas</a>
         <a href="#financeiro">Financeiro</a>
+        <a href="#variantes">Variantes</a>
         <a href="imagens.html">Variantes da Logo</a>
       </nav>
     </div>
@@ -940,6 +983,24 @@
           instituição, define-se para o cargo de Editora na Arbor Editora o valor de
           <strong>R$ 3.600,00 mensais</strong>, garantindo o alinhamento com a média inicial de mercado e
           viabilidade operacional do projeto.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Visualizador de Imagens (Lightbox) -->
+  <div id="modal-imagem" class="modal-overlay" aria-hidden="true" role="dialog" style="background: rgba(15, 10, 25, 0.95);">
+    <div class="modal-container" style="max-width: 1000px; background: transparent; border: 0; box-shadow: none;">
+      <header class="modal-header" style="background: transparent; border: 0; padding: 1.2rem 2rem 0.5rem;">
+        <h3 id="modal-imagem-titulo" style="color: #fff; font-size: 1.25rem;">Visualizar Logo</h3>
+        <button class="btn-fechar" id="btn-fechar-modal-imagem" aria-label="Fechar modal" style="color: #fff; background: rgba(255,255,255,0.1);">
+          <svg class="ic" style="width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </header>
+      <div class="modal-body" style="padding: 1.5rem 2rem 2rem; display: flex; justify-content: center; align-items: center; overflow: hidden;">
+        <img id="modal-imagem-src" src="" alt="Variante Ampliada" style="max-width: 100%; max-height: 75vh; object-fit: contain; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.6);">
       </div>
     </div>
   </div>
