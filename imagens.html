@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeria de Imagens — ARBOR EDITORA</title>
+  <meta name="description" content="Acervo de imagens e identidade visual da Arbor Editora: logos, variações e favicon.">
+  <link rel="icon" type="image/png" href="img/favicon-arbor.png">
+  <link rel="stylesheet" href="css/estilo.css">
+  <style>
+    /* Estilos próprios da galeria (as logos são brancas, os cartões usam o roxo da marca) */
+    .galeria-topo { padding: 46px 0 10px; }
+    .galeria-topo .kicker { color: var(--purple); }
+    .galeria-topo p { color: var(--ink-2); max-width: 60ch; margin-top: 8px; }
+    .galeria-topo .voltar {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-bottom: 22px; font-size: 14px; font-weight: 600;
+      color: var(--purple-deep); text-decoration: none;
+    }
+    .galeria-topo .voltar:hover { color: var(--purple-vivid); }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 20px;
+      padding: 26px 0 70px;
+    }
+    .obra {
+      border: 1px solid var(--borda-lavanda, rgba(130, 10, 209, .15));
+      border-radius: 20px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 14px 34px -18px rgba(130, 10, 209, .25);
+    }
+    .obra .moldura {
+      display: grid; place-items: center;
+      min-height: 190px;
+      padding: 26px;
+      background:
+        radial-gradient(420px 200px at 80% -20%, rgba(0, 255, 206, .18), transparent 60%),
+        linear-gradient(135deg, #9a18e8 0%, #820ad1 45%, #52077f 100%);
+    }
+    .obra .moldura img { max-width: 100%; max-height: 150px; height: auto; filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .25)); }
+    .obra .info { padding: 16px 18px 18px; }
+    .obra .info b { display: block; font-size: 15px; }
+    .obra .info code {
+      display: inline-block; margin: 6px 0 8px;
+      font: 500 12px/1 var(--font-mono, monospace);
+      color: var(--purple-deep);
+      background: rgba(130, 10, 209, .07);
+      padding: 4px 8px; border-radius: 6px;
+    }
+    .obra .info p { font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <header class="galeria-topo">
+      <a class="voltar" href="index.html">← Voltar para a página principal</a>
+      <span class="kicker">Identidade Visual</span>
+      <h2>Galeria de Imagens</h2>
+      <p>Acervo de imagens do projeto Arbor Editora. As logos são brancas com fundo transparente,
+        por isso são exibidas sobre o roxo oficial da marca.</p>
+    </header>
+
+    <section class="galeria" aria-label="Imagens do projeto">
+      <article class="obra">
+        <div class="moldura"><img src="img/logo-editora-13.png" alt="Logo horizontal da Arbor Editora"></div>
+        <div class="info">
+          <b>Logo principal (horizontal)</b>
+          <code>img/logo-editora-13.png</code>
+          <p>Usada no hero da página principal.</p>
+        </div>
+      </article>
+
+      <article class="obra">
+        <div class="moldura"><img src="img/logo-arbor.png" alt="Símbolo da Arbor Editora"></div>
+        <div class="info">
+          <b>Símbolo Arbor</b>
+          <code>img/logo-arbor.png</code>
+          <p>Usada no rodapé e como marca-d'água do hero.</p>
+        </div>
+      </article>
+
+      <article class="obra">
+        <div class="moldura"><img src="img/favicon-arbor.png" alt="Favicon da Arbor Editora"></div>
+        <div class="info">
+          <b>Favicon</b>
+          <code>img/favicon-arbor.png</code>
+          <p>Ícone exibido na aba do navegador.</p>
+        </div>
+      </article>
+
+      <article class="obra">
+        <div class="moldura"><img src="img/logo-editora-a.png" alt="Variação A da logo da Arbor Editora"></div>
+        <div class="info">
+          <b>Variação — Logo A</b>
+          <code>img/logo-editora-a.png</code>
+          <p>Variação da identidade visual (reserva, não utilizada na página).</p>
+        </div>
+      </article>
+
+      <article class="obra">
+        <div class="moldura"><img src="img/logo-editora-14.png" alt="Variação 14 da logo da Arbor Editora"></div>
+        <div class="info">
+          <b>Variação — Logo 14</b>
+          <code>img/logo-editora-14.png</code>
+          <p>Variação da identidade visual (reserva, não utilizada na página).</p>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+
+</html>
