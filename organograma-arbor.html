@@ -211,6 +211,39 @@ html, body{
 }
 .tree ul.escada .card{ width:220px; }
 
+/* Ramais de staff (assessoria) — ligam-se ao tronco entre Diretoria e Gerência */
+.staff-meio{
+  position:absolute; top:0; transform:translateY(-50%);
+  display:flex; align-items:center; white-space:nowrap;
+  z-index:1;
+  transition:opacity .2s ease;
+}
+.staff-meio.esq{ right:50%; flex-direction:row-reverse; }
+.staff-meio.dir{ left:50%; }
+.staff-meio .staff-traco{ width:46px; height:2px; background:var(--purple); opacity:.5; }
+.staff-lado{
+  font:700 9.5px/1 var(--font-mono);
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--purple-deep); margin:0 9px;
+}
+li.staff-oculto .staff-meio{ opacity:0; pointer-events:none; }
+
+/* Botão único, no meio da linha, para exibir/ocultar o staff */
+.staff-toggle{
+  position:absolute; top:0; left:50%; z-index:2;
+  transform:translate(-50%,-50%) rotate(45deg);
+  width:18px; height:18px; border-radius:50%;
+  background:var(--purple); color:#fff;
+  font:700 13px/17px var(--font-display); text-align:center;
+  box-shadow:0 3px 9px rgba(130,10,209,.4);
+  cursor:pointer;
+  transition:transform .3s cubic-bezier(0.34,1.56,0.64,1), background .2s;
+}
+.staff-toggle.fechado{
+  background:var(--green); color:var(--purple-deep);
+  transform:translate(-50%,-50%) rotate(0deg);
+}
+
 /* ================================================================
    CARDS
    ================================================================ */
@@ -364,6 +397,7 @@ ul.children.opening{ animation:surge .3s var(--ease); }
     linear-gradient(90deg,var(--purple-vivid),var(--green)) border-box;
 }
 .sw-cargo{ background:#fff; border:1px solid var(--borda); }
+.sw-staff{ background:var(--purple); border-radius:50%; }
 
 /* Responsividade */
 @media (max-width:640px){
@@ -417,6 +451,7 @@ ul.children.opening{ animation:surge .3s var(--ease); }
   <div class="legenda-item"><span class="swatch sw-area"></span>Áreas</div>
   <div class="legenda-item"><span class="swatch sw-sup"></span>Supervisores</div>
   <div class="legenda-item"><span class="swatch sw-cargo"></span>Cargos operacionais</div>
+  <div class="legenda-item"><span class="swatch sw-staff"></span>Assessoria (Staff)</div>
 </div>
 
 <!-- PAINEL DE ZOOM FLUTUANTE -->
@@ -450,6 +485,7 @@ const ORG = {
   nome:"Diretoria", tipo:"topo", descricao:"",
   filhos:[{
     nome:"Gerência", tipo:"topo", descricao:"",
+    staff:[ {nome:"Controladoria"}, {nome:"Jurídico"} ],
     filhos:[
       {
         nome:"Soluções Educacionais", tipo:"area", descricao:"",
@@ -546,12 +582,45 @@ function criarCard(node, temFilhos){
   return card;
 }
 
+function anexarStaff(li, lista){
+  const nomes = lista.map(s => (typeof s === "string" ? s : s.nome));
+  const esq = document.createElement("div");
+  esq.className = "staff-meio esq";
+  esq.innerHTML = `<span class="staff-traco"></span><span class="staff-lado">${nomes[0]}</span>`;
+  const dir = document.createElement("div");
+  dir.className = "staff-meio dir";
+  dir.innerHTML = `<span class="staff-traco"></span><span class="staff-lado">${nomes[1]}</span>`;
+
+  const toggle = document.createElement("span");
+  toggle.className = "staff-toggle";
+  toggle.textContent = "+";
+  toggle.setAttribute("role","button");
+  toggle.setAttribute("tabindex","0");
+  toggle.setAttribute("aria-label","Mostrar ou ocultar assessoria");
+  const alternarStaff = () => {
+    li.classList.toggle("staff-oculto");
+    toggle.classList.toggle("fechado");
+  };
+  toggle.addEventListener("click", alternarStaff);
+  toggle.addEventListener("keydown", e => {
+    if (e.key==="Enter"||e.key===" "){ e.preventDefault(); alternarStaff(); }
+  });
+
+  li.appendChild(esq);
+  li.appendChild(dir);
+  li.appendChild(toggle);
+}
+
 function criarNo(node){
   const li = document.createElement("li");
   li.className = "node";
   const temFilhos = Array.isArray(node.filhos) && node.filhos.length > 0;
   const card = criarCard(node, temFilhos);
   li.appendChild(card);
+
+  if (Array.isArray(node.staff) && node.staff.length === 2){
+    anexarStaff(li, node.staff);
+  }
 
   if (temFilhos){
     const ul = document.createElement("ul");
