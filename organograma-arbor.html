@@ -197,9 +197,8 @@ html, body{
 .tree ul.root > li::before,
 .tree ul.root > li::after{ display:none; }
 
-/* Escada verde */
+/* Escada (hierarquia vertical) */
 .tree ul.escada{
-  --line:var(--green-text);
   flex-direction:column; align-items:center; padding-top:0;
 }
 .tree ul.escada::before{ display:none; }
@@ -209,7 +208,6 @@ html, body{
   left:50%; width:0; height:22px;
   border-top:none; border-left:2px solid var(--line);
 }
-.tree ul.escada .card{ width:220px; }
 
 /* Ramais de staff (assessoria) — ligam-se ao tronco entre Diretoria e Gerência */
 .staff-meio{
@@ -501,13 +499,13 @@ const ORG = {
         filhos:[{
           nome:"Supervisor", tipo:"supervisor", descricao:"",
           filhos:[
+            { nome:"Equipe Técnico Pedagógica", tipo:"cargo", descricao:"" },
             {
-              nome:"Equipe Técnica Pedagógica", tipo:"cargo",
-              layout:"escada", corLinha:"verde", descricao:"",
+              nome:"Analista Educacional", tipo:"cargo",
+              layout:"escada", semToggle:true, descricao:"",
               filhos:[
-                { nome:"Analista Educacional",   tipo:"cargo", cor:"verde", descricao:"" },
-                { nome:"Assistente Educacional", tipo:"cargo", cor:"verde", descricao:"" },
-                { nome:"Auxiliar Educacional",   tipo:"cargo", cor:"verde", descricao:"" }
+                { nome:"Assistente Educacional", tipo:"cargo", descricao:"" },
+                { nome:"Auxiliar Educacional",   tipo:"cargo", descricao:"" }
               ]
             },
             { nome:"Design Instrucional", tipo:"cargo", badges:["Jr","Pleno","Sênior"], descricao:"" },
@@ -522,7 +520,7 @@ const ORG = {
         filhos:[{
           nome:"Supervisor", tipo:"supervisor", descricao:"",
           filhos:[
-            { nome:"Equipe Técnica Pedagógica", tipo:"cargo", descricao:"" },
+            { nome:"Equipe Técnico Pedagógica", tipo:"cargo", descricao:"" },
             { nome:"Administrativo",            tipo:"cargo", descricao:"" }
           ]
         }]
@@ -569,7 +567,7 @@ function criarCard(node, temFilhos){
     card.appendChild(row);
   }
 
-  if (temFilhos){
+  if (temFilhos && !node.semToggle){
     card.classList.add("has-kids");
     card.setAttribute("role","button");
     card.setAttribute("tabindex","0");
@@ -629,10 +627,12 @@ function criarNo(node){
     if (node.layout === "escada") ul.classList.add("escada");
     node.filhos.forEach(filho => ul.appendChild(criarNo(filho)));
     li.appendChild(ul);
-    card.addEventListener("click", () => alternarRamo(li, card));
-    card.addEventListener("keydown", e => {
-      if (e.key==="Enter"||e.key===" "){ e.preventDefault(); alternarRamo(li,card); }
-    });
+    if (!node.semToggle){
+      card.addEventListener("click", () => alternarRamo(li, card));
+      card.addEventListener("keydown", e => {
+        if (e.key==="Enter"||e.key===" "){ e.preventDefault(); alternarRamo(li,card); }
+      });
+    }
   }
 
   card.addEventListener("mouseenter", () => mostrarTooltip(card));
