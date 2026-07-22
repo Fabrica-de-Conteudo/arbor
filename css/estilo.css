@@ -98,7 +98,7 @@ nav.topo {
 }
 nav.topo .wrap {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 1.2rem; padding-block: .7rem; max-width: 1160px;
+  gap: 1.2rem; padding-block: .7rem; max-width: 1240px;
 }
 nav.topo .marca {
   display: flex; align-items: center; gap: 10px;
@@ -110,10 +110,29 @@ nav.topo .marca {
 nav.topo .marca img { width: 26px; height: auto; }
 nav.topo .marca em { color: var(--green); font-style: normal; }
 nav.topo ul {
-  display: flex; gap: 1.1rem; list-style: none;
+  display: flex; gap: .85rem; list-style: none;
   overflow-x: auto; scrollbar-width: none;
 }
 nav.topo ul::-webkit-scrollbar { display: none; }
+/* Fade na borda direita quando o menu tem itens escondidos por rolagem */
+nav.topo ul.rolavel {
+  -webkit-mask-image: linear-gradient(90deg, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, #000 90%, transparent);
+}
+/* Botão hambúrguer — oculto no desktop, exibido ao colapsar */
+nav.topo .nav-toggle {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 42px; height: 38px; padding: 8px; flex-shrink: 0; margin-left: auto;
+  background: transparent; border: 1px solid rgba(130, 10, 209, .4);
+  border-radius: 10px; cursor: pointer;
+}
+nav.topo .nav-toggle span {
+  display: block; width: 100%; height: 2px; border-radius: 2px;
+  background: var(--nevoa); transition: transform .3s ease, opacity .3s ease;
+}
+nav.topo .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+nav.topo .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+nav.topo .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 nav.topo ul a {
   color: var(--nevoa); text-decoration: none;
   font-size: .82rem; font-weight: 500; white-space: nowrap;
@@ -885,6 +904,26 @@ body.modal-aberto {
 }
 
 /* ---------- Responsivo ---------- */
+/* ---------- Menu colapsado (hambúrguer) ---------- */
+@media (max-width: 1100px) {
+  nav.topo .nav-toggle { display: flex; }
+  nav.topo ul.rolavel { -webkit-mask-image: none; mask-image: none; }
+  #nav-secoes {
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 0 24px; overflow: hidden; max-height: 0;
+    background: rgba(23, 16, 42, .98);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(130, 10, 209, .35);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .45);
+    transition: max-height .35s ease;
+  }
+  #nav-secoes.aberto { max-height: 80vh; overflow-y: auto; }
+  #nav-secoes li { border-top: 1px solid rgba(130, 10, 209, .15); }
+  #nav-secoes li:first-child { border-top: 0; }
+  nav.topo ul a { display: block; padding: .9rem 0; font-size: 1rem; }
+  nav.topo ul a::after { display: none; }
+}
 @media (max-width: 1024px) {
   section { padding: 4rem 0; }
   .sim { grid-template-columns: 1fr; }
@@ -917,10 +956,9 @@ body.modal-aberto {
   .hero .btn { width: 100%; display: flex; justify-content: center; margin: 0 0 12px 0 !important; }
   .hero::after { display: none; }
   
-  /* Header Nav Mobile */
-  nav.topo ul { padding-inline: 18px; margin-inline: -18px; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
-  nav.topo ul a { font-size: 1rem; padding-block: .4rem; }
-  
+  /* Menu colapsado alinha o padding lateral com o conteúdo */
+  #nav-secoes { padding: 0 18px; }
+
   section { padding: 3.5rem 0; }
   
   .sim-modos .modo { min-width: 180px; padding: 1rem; }

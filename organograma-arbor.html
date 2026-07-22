@@ -34,7 +34,7 @@
   --sombra:        0 4px 18px rgba(28,18,48,.09);
   --ease:          cubic-bezier(0.16,1,0.3,1);
   --gap:           28px;
-  --line:          rgba(130,10,209,.5);
+  --line:          rgba(130,10,209,.85);
 }
 
 *, *::before, *::after{ margin:0; padding:0; box-sizing:border-box; }
@@ -157,6 +157,8 @@ html, body{
   will-change:transform;
   padding:60px 80px 80px;
 }
+/* Transição suave só no reajuste automático (expandir/recolher); arrastar e zoom continuam instantâneos */
+.viewport.suave{ transition:transform .45s cubic-bezier(0.16,1,0.3,1); }
 
 /* ================================================================
    ÁRVORE — estrutura ul/li com conectores
@@ -169,9 +171,9 @@ html, body{
 }
 .tree ul::before{
   content:''; position:absolute;
-  top:0; left:50%; transform:translateX(-50%);
+  top:0; left:calc(50% - 1px);
   width:2px; height:var(--gap);
-  background:var(--line); z-index:0;
+  background:var(--line); z-index:1;
 }
 .tree li{
   display:flex; flex-direction:column; align-items:center;
@@ -180,16 +182,16 @@ html, body{
 .tree li::before{
   content:''; position:absolute; top:0; right:50%;
   width:50%; height:var(--gap);
-  border-top:2px solid var(--line); z-index:0;
+  border-top:2px solid var(--line); z-index:1;
 }
 .tree li::after{
-  content:''; position:absolute; top:0; left:50%;
-  width:50%; height:var(--gap);
+  content:''; position:absolute; top:0; left:calc(50% - 1px);
+  width:calc(50% + 1px); height:var(--gap);
   border-top:2px solid var(--line);
-  border-left:2px solid var(--line); z-index:0;
+  border-left:2px solid var(--line); z-index:1;
 }
-.tree li:first-child::before{ border-top:none; }
-.tree li:last-child::after  { border-top:none; }
+.tree li:first-of-type::before{ border-top:none; }
+.tree li:last-of-type::after  { border-top:none; }
 
 .tree ul.root{ padding-top:0; }
 .tree ul.root::before{ display:none; }
@@ -205,13 +207,17 @@ html, body{
 .tree ul.escada > li{ padding:22px 0 0; }
 .tree ul.escada > li::before{ display:none; }
 .tree ul.escada > li::after{
-  left:50%; width:0; height:22px;
+  left:calc(50% - 1px); width:0; height:22px;
   border-top:none; border-left:2px solid var(--line);
 }
 
-/* Ramais de staff (assessoria) — ligam-se ao tronco entre Diretoria e Gerência */
+/* Tronco mais alto abaixo da Gerência, para acomodar a assessoria sem sobrepor o botão do card */
+.tree ul.areas{ padding-top:calc(var(--gap) * 2); }
+.tree ul.areas::before{ height:calc(var(--gap) * 2); }
+
+/* Ramais de staff (assessoria) — ligam-se ao tronco logo abaixo da Gerência */
 .staff-meio{
-  position:absolute; top:0; transform:translateY(-50%);
+  position:absolute; top:calc(var(--gap) + 6px); transform:translateY(-50%);
   display:flex; align-items:center; white-space:nowrap;
   z-index:1;
   transition:opacity .2s ease;
@@ -228,11 +234,11 @@ li.staff-oculto .staff-meio{ opacity:0; pointer-events:none; }
 
 /* Botão único, no meio da linha, para exibir/ocultar o staff */
 .staff-toggle{
-  position:absolute; top:0; left:50%; z-index:2;
+  position:absolute; top:calc(var(--gap) + 6px); left:50%; z-index:2;
   transform:translate(-50%,-50%) rotate(45deg);
   width:18px; height:18px; border-radius:50%;
   background:var(--purple); color:#fff;
-  font:700 13px/17px var(--font-display); text-align:center;
+  display:flex; align-items:center; justify-content:center;
   box-shadow:0 3px 9px rgba(130,10,209,.4);
   cursor:pointer;
   transition:transform .3s cubic-bezier(0.34,1.56,0.64,1), background .2s;
@@ -335,12 +341,17 @@ li.staff-oculto .staff-meio{ opacity:0; pointer-events:none; }
   bottom:-11px; left:50%; transform:translateX(-50%);
   width:20px; height:20px; border-radius:50%;
   background:var(--purple); color:#fff;
-  font:700 13px/19px var(--font-display);
+  display:flex; align-items:center; justify-content:center;
   box-shadow:0 3px 10px rgba(130,10,209,.4);
   pointer-events:none; z-index:2;
   transition:transform .3s cubic-bezier(0.34,1.56,0.64,1), background .2s;
   transform:translateX(-50%) rotate(45deg);
 }
+.card.fechado .toggle{
+  background:var(--green); color:var(--purple-deep);
+  transform:translateX(-50%) rotate(0deg);
+}
+.c-cargo-verde .toggle{ background:var(--green-text); }
 .card.fechado .toggle{
   background:var(--green); color:var(--purple-deep);
   transform:translateX(-50%) rotate(0deg);
@@ -572,15 +583,17 @@ function criarCard(node, temFilhos){
     card.setAttribute("role","button");
     card.setAttribute("tabindex","0");
     card.setAttribute("aria-expanded","true");
+    const ICON_PLUS = `<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg>`;
     const t = document.createElement("span");
     t.className = "toggle";
-    t.textContent = "+";
+    t.innerHTML = ICON_PLUS;
     card.appendChild(t);
   }
   return card;
 }
 
-function anexarStaff(li, lista){
+function anexarStaff(li, alvo, lista){
+  const ICON_PLUS = `<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg>`;
   const nomes = lista.map(s => (typeof s === "string" ? s : s.nome));
   const esq = document.createElement("div");
   esq.className = "staff-meio esq";
@@ -591,7 +604,7 @@ function anexarStaff(li, lista){
 
   const toggle = document.createElement("span");
   toggle.className = "staff-toggle";
-  toggle.textContent = "+";
+  toggle.innerHTML = ICON_PLUS;
   toggle.setAttribute("role","button");
   toggle.setAttribute("tabindex","0");
   toggle.setAttribute("aria-label","Mostrar ou ocultar assessoria");
@@ -604,9 +617,9 @@ function anexarStaff(li, lista){
     if (e.key==="Enter"||e.key===" "){ e.preventDefault(); alternarStaff(); }
   });
 
-  li.appendChild(esq);
-  li.appendChild(dir);
-  li.appendChild(toggle);
+  alvo.appendChild(esq);
+  alvo.appendChild(dir);
+  alvo.appendChild(toggle);
 }
 
 function criarNo(node){
@@ -616,12 +629,9 @@ function criarNo(node){
   const card = criarCard(node, temFilhos);
   li.appendChild(card);
 
-  if (Array.isArray(node.staff) && node.staff.length === 2){
-    anexarStaff(li, node.staff);
-  }
-
+  let ul = null;
   if (temFilhos){
-    const ul = document.createElement("ul");
+    ul = document.createElement("ul");
     ul.className = "children";
     if (node.nome === "Gerência") ul.classList.add("areas");
     if (node.layout === "escada") ul.classList.add("escada");
@@ -633,6 +643,11 @@ function criarNo(node){
         if (e.key==="Enter"||e.key===" "){ e.preventDefault(); alternarRamo(li,card); }
       });
     }
+  }
+
+  /* Assessoria (staff) fica no tronco ABAIXO do card, dentro do container de filhos */
+  if (Array.isArray(node.staff) && node.staff.length === 2){
+    anexarStaff(li, ul || li, node.staff);
   }
 
   card.addEventListener("mouseenter", () => mostrarTooltip(card));
@@ -656,12 +671,16 @@ function alternarRamo(li, card){
     card.classList.remove("fechado");
     ul.classList.add("opening");
     card.setAttribute("aria-expanded","true");
+    requestAnimationFrame(() => requestAnimationFrame(ajustarComTransicao));
     setTimeout(() => ul.classList.remove("opening"), 320);
   } else {
     ul.classList.add("closing");
     card.classList.add("fechado");
     card.setAttribute("aria-expanded","false");
-    setTimeout(() => { li.classList.add("collapsed"); ul.classList.remove("closing"); }, 180);
+    setTimeout(() => {
+      li.classList.add("collapsed"); ul.classList.remove("closing");
+      ajustarComTransicao();
+    }, 180);
   }
 }
 
@@ -710,6 +729,13 @@ function ajustarAoFit(){
   tx = (cw - treeW * scale) / 2;
   ty = (ch - treeH * scale) / 2;
   aplicarTransform();
+}
+
+/* Reajusta com uma transição suave (usado após expandir/recolher um ramo) */
+function ajustarComTransicao(){
+  viewport.classList.add("suave");
+  ajustarAoFit();
+  setTimeout(() => viewport.classList.remove("suave"), 450);
 }
 
 /* ---- DRAG-TO-PAN ---- */

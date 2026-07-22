@@ -53,6 +53,33 @@
   });
   aoRolar();
 
+  /* ---- Menu responsivo: hambúrguer + fade de rolagem ---- */
+  var navToggle = d.getElementById("nav-toggle");
+  function abrirMenu(abrir) {
+    if (!navToggle) return;
+    navToggle.setAttribute("aria-expanded", abrir ? "true" : "false");
+    nav.classList.toggle("aberto", abrir);
+  }
+  if (navToggle) {
+    navToggle.addEventListener("click", function () {
+      abrirMenu(navToggle.getAttribute("aria-expanded") !== "true");
+    });
+    nav.addEventListener("click", function (ev) {
+      if (ev.target.closest("a")) abrirMenu(false);
+    });
+    addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape") abrirMenu(false);
+    });
+    d.addEventListener("click", function (ev) {
+      if (!ev.target.closest("nav.topo")) abrirMenu(false);
+    });
+  }
+  function ajustarFadeMenu() {
+    nav.classList.toggle("rolavel", nav.scrollWidth > nav.clientWidth + 4);
+  }
+  addEventListener("resize", ajustarFadeMenu, { passive: true });
+  ajustarFadeMenu();
+
   /* ---- Revelação das seções ao entrar na tela ---- */
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entradas) {
